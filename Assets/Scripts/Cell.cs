@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour {
-    enum type {blind,alzheimer,wheelchair};
-	// Use this for initialization
-	void Start () {
+public class Cell : MonoBehaviour {
+
+    // Use this for initialization
+    
+    void Start () {
 		
 	}
 	
