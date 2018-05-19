@@ -58,10 +58,12 @@ public class Character : MonoBehaviour
         return (ActionsToDo)(UnityEngine.Random.Range(0, ActionsToDo.GetNames(typeof(ActionsToDo)).Length));
 
     }
+    int i = 0;
     public void doAction()
     {
-        //print(randomAction());
         myCurrentAction = randomAction();
+        //print(myCurrentAction);
+       // myCurrentAction = (ActionsToDo)0;
         //myCurrentAction = ActionsToDo.rotationAction;
         startPosition = this.transform.position;
         destinyPosition = this.transform.position;
@@ -72,7 +74,7 @@ public class Character : MonoBehaviour
         switch (myCurrentAction)
         {
             case ActionsToDo.moveAction:
-                destinyPosition = startPosition + Vector3.forward * moveDistance;
+                destinyPosition = startPosition + transform.forward * moveDistance;
                 startMoveCounter = true;
                 break;
             case ActionsToDo.rotationAction:
@@ -109,11 +111,13 @@ public class Character : MonoBehaviour
             float rotateCharacterTimerNormalized = moveCharacterTimer % moveCharacterTime;
            // print(transform.rotation);
             transform.rotation = Quaternion.Lerp(startRotation, destinyRotation, rotateCharacterTimerNormalized);
+           // transform.Rotate(Vector3.up* Time.deltaTime, Space.World);
             //Quaternion.Euler(0, rotateYValue, 0);
             // transform.position = vec3Lerp;
         }
         else
         {
+            //transform.Rotate(Vector3.up* 90, Space.World);
             moveCharacterTimer = 0;
             startMoveCounter = false;
         }
