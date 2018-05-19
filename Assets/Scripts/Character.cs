@@ -83,7 +83,6 @@ public class Character : MonoBehaviour
     //int i = 0;
     public void doAction()
     {
-        //asdf
         myCurrentAction = randomAction();
         //print(myCurrentAction);
         // myCurrentAction = (ActionsToDo)0;
