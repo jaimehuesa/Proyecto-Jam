@@ -41,9 +41,9 @@ public class GameMainController : MonoBehaviour
 
         characterInstantiationParent.name = "Characters";
         characters = new List<GameObject>();
-        createMap();
-        spawnerGameObject = Instantiate(cellPrefab,
-            new Vector3(2, 0, 0), Quaternion.identity);
+        //createMap();
+        //spawnerGameObject = Instantiate(cellPrefab,
+            //new Vector3(2, 0, 0), Quaternion.identity);
         // createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
 
      
