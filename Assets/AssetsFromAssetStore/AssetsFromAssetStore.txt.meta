@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: f56005fd91a145e4ab1236d55eea3f06
 timeCreated: 1526683128
+=======
+guid: ec3b11125fc3a8e41bca8e2118b25aca
+timeCreated: 1526684576
+>>>>>>> adrian
 licenseType: Free
 TextScriptImporter:
   externalObjects: {}

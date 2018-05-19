@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 0a2a9df0f12dc22459eef631128ba53b
 folderAsset: yes
 timeCreated: 1526683128
+=======
+guid: 785e04805e9df9047be1346cd6a60551
+folderAsset: yes
+timeCreated: 1526684551
+>>>>>>> adrian
 licenseType: Free
 DefaultImporter:
   externalObjects: {}

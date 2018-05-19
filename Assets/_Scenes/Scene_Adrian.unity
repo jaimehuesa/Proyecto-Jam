@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b41f714a344b44097f8fe6bf474567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPosYCell: 0.6
 --- !u!1001 &1779211911
 Prefab:
   m_ObjectHideFlags: 0
@@ -354,6 +355,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 23115857510604758, guid: 84f52dbff3a6435499dde177e66ebe57,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b53729decd7a0e54cbe9953096cad8e5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84f52dbff3a6435499dde177e66ebe57, type: 2}
   m_IsPrefabParent: 0
@@ -373,3 +379,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20fc93dba3f89c443b8835f33bf4046d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPosYCell: 0.6
