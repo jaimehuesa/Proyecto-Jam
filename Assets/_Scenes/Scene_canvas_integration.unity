@@ -542,7 +542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca6da27e094e4c4dbcd024c20782273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MyText: {fileID: 1783280538}
+  timerText: {fileID: 1783280538}
+  HPText: {fileID: 470032712}
+  disabledArrivedText: {fileID: 835427723}
+  penalizationText: {fileID: 892653213}
 --- !u!1001 &155593034
 Prefab:
   m_ObjectHideFlags: 0
@@ -1264,6 +1267,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4538028083161056, guid: 0ea3208d6b001b949b3b4cc22bb34422,
     type: 2}
   m_PrefabInternal: {fileID: 429862031}
+--- !u!114 &470032712 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114016030597470004, guid: 0e5292f5c86cf35438f8b8f080bdb88a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1191977293}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &502814826
 Prefab:
   m_ObjectHideFlags: 0
@@ -1562,6 +1571,7 @@ MonoBehaviour:
   - {fileID: 1879973232075222, guid: ca1d4337aca2e1546822e3cee8c8a8f2, type: 2}
   - {fileID: 1771556965897840, guid: 9a53954d119952940994c7839c027ef9, type: 2}
   - {fileID: 1664432763005522, guid: df3929243ce26e546a074c04cb8e35f2, type: 2}
+  HUDManagerGameObject: {fileID: 151129178}
   cellSize: 1
 --- !u!4 &590856450
 Transform:
@@ -1934,6 +1944,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4546522505815726, guid: 2458669883336ba47adac386044d268d,
     type: 2}
   m_PrefabInternal: {fileID: 803573986}
+--- !u!114 &835427723 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114498620243335176, guid: 0e5292f5c86cf35438f8b8f080bdb88a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1191977293}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &872802855
 Prefab:
   m_ObjectHideFlags: 0
@@ -2068,6 +2084,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4538028083161056, guid: 0ea3208d6b001b949b3b4cc22bb34422,
     type: 2}
   m_PrefabInternal: {fileID: 887157675}
+--- !u!114 &892653213 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114903209543900060, guid: 0e5292f5c86cf35438f8b8f080bdb88a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1191977293}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &893894034
 Prefab:
   m_ObjectHideFlags: 0

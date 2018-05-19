@@ -8,8 +8,21 @@ public class GameMainController : MonoBehaviour
     public GameObject cellPrefab;
     public GameObject spawnerGameObject;
     public GameObject[] modelPrefabs3D;
+    public GameObject HUDManagerGameObject;
+
+
     // parents no hace falta que sean prefabs ya que genera algo de tipo empty
 
+    //score things to change
+    const int initialHP = 3;
+    const int initialDisabledArrived = 0;
+    const float initialPenalization = 0;
+
+    int HP= initialHP;
+    int disabledArrived= initialDisabledArrived;
+    float penalization = initialPenalization;
+
+    HUDManager hudmanager;
     public float cellSize = 1;
     int numCharactersSaved = 0;
     GameObject mapInstantiationParent; // to store the map tiles here
@@ -26,8 +39,8 @@ public class GameMainController : MonoBehaviour
     float doActionTime = 2;
     float doActionTimer = 0;
 
-    float charactersInDestiny = 0;
-    float charactersEliminated = 0;
+    //float charactersInDestiny = 0;
+    //float charactersEliminated = 0;
 
 
 
@@ -36,7 +49,10 @@ public class GameMainController : MonoBehaviour
 
     void Start()
     {
-
+        hudmanager = HUDManagerGameObject.GetComponent<HUDManager>();
+        hudmanager.setHP(initialHP);
+        hudmanager.setArrived(initialDisabledArrived);
+        hudmanager.setPenalization(initialPenalization);
         characterInstantiationParent = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
 
         characterInstantiationParent.name = "Characters";
@@ -130,26 +146,53 @@ public class GameMainController : MonoBehaviour
         }
 
     }
-    public void characterSaved()
+    /*public void characterSaved()
     {
         numCharactersSaved++;
     }
     public void increaseScore()
     {
-        charactersInDestiny++;
-    }
-    public void decreaseScore()
+        characters++;
+    }*/
+    
+    public void addPenalty()
     {
-        charactersEliminated++;
+        penalization++;
+        hudmanager.setPenalization(penalization);
+    }
+
+    public void addArrivedDisabled()
+    {
+        disabledArrived++;
+        hudmanager.setArrived(disabledArrived);
+    }
+    
+   public void decreaseScoreCharacterEliminated()
+    {
+        //charactersEliminated++; //no need? hp lo sustituye 
+        if (HP > 1) {
+            HP--;
+            hudmanager.setHP(HP);
+        }
+        else {
+            gameOver();
+        }
+
+
+    }
+    void gameOver()
+    {
+
+        //call game over in hud manager 
     }
     public void removeCharacterFromList(GameObject characterGameObject)
     {
         //print(characters.Count);
         characters.Remove(characterGameObject);
-        charactersEliminated++;
         //print(characters.Count);
-
     }
+
+
     // Update is called once per frame
     void Update()
     {

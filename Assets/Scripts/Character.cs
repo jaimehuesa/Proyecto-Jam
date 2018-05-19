@@ -9,7 +9,8 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public enum disabilites {  alzheimer, blind, wheelchair };
-    public GameObject destructionObjectPrefabObjectPrefab;
+    public GameObject destructionObjectPrefab;
+    public GameObject arrivedObjectPrefab;
     public enum ActionsToDo { moveAction, rotationAction, eliminatedAction, victoryAction };
 
     GameMainController gameMainController;
@@ -147,14 +148,28 @@ public class Character : MonoBehaviour
             startMoveCounter = false;
         }
     }
+    // call this 3 functions from cell triggers
+    public void addPenalty()
+    {
+        gameMainController.addPenalty();
+        // effects here
+    }
+
+    public void addArrivedDisabled()
+    {
+        Instantiate(arrivedObjectPrefab, transform.position, Quaternion.identity);
+        gameMainController.addArrivedDisabled();
+        gameMainController.removeCharacterFromList(this.gameObject);
+        gameMainController.addArrivedDisabled();
+        Destroy(this.gameObject);
+        //effects here
+    }
     public void eliminateCharacter()
     {
-        Instantiate(destructionObjectPrefabObjectPrefab,transform.position,Quaternion.identity);
+        Instantiate(destructionObjectPrefab,transform.position,Quaternion.identity);
         gameMainController.removeCharacterFromList(this.gameObject);
+        gameMainController.decreaseScoreCharacterEliminated();
         Destroy(this.gameObject);
     }
-    void characterArrivedDestiny()
-    {
-
-    }
+    
 }
