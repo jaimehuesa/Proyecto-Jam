@@ -5,7 +5,10 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public enum disabilites { blind, alzheimer, wheelchair };
-    enum ActionsToDo { moveAction, rotationAction, disappear };
+    public GameObject destructionObjectPrefabObjectPrefab;
+  
+
+    enum ActionsToDo { moveAction, rotationAction, eliminatedAction, victoryAction };
     ActionsToDo myCurrentAction = ActionsToDo.moveAction; // por defecto va a moverse
     disabilites myDisability;
     Vector3 startPosition;
@@ -13,7 +16,7 @@ public class Character : MonoBehaviour
     Quaternion startRotation;
     Quaternion destinyRotation;
 
-
+    Animator myAnimator;
 
     float moveDistance = 1;
     float moveCharacterTime = 1;
@@ -24,9 +27,16 @@ public class Character : MonoBehaviour
 
     GameObject myCell;
     GameObject nextCell;
+
+    public GameObject my3DModel;
     void Start()
     {
         myDisability = disabilites.blind;
+     
+    }
+    public void setMyAnimator()
+    {
+        myAnimator = my3DModel.GetComponent<Animator>();
     }
     public disabilites getMyDisability()
     {
@@ -47,7 +57,7 @@ public class Character : MonoBehaviour
         }
 
     }
-
+  
     private disabilites RandomDisabilites()
     {
         return (disabilites)(UnityEngine.Random.Range(0, disabilites.GetNames(typeof(disabilites)).Length));
@@ -63,8 +73,8 @@ public class Character : MonoBehaviour
     {
         myCurrentAction = randomAction();
         //print(myCurrentAction);
-       // myCurrentAction = (ActionsToDo)0;
-        //myCurrentAction = ActionsToDo.rotationAction;
+        // myCurrentAction = (ActionsToDo)0;
+        // myCurrentAction = ActionsToDo.rotationAction;
         startPosition = this.transform.position;
         destinyPosition = this.transform.position;
         startRotation = this.transform.rotation;
@@ -90,6 +100,7 @@ public class Character : MonoBehaviour
         
         if (moveCharacterTimer < moveCharacterTime)
         {
+            myAnimator.SetTrigger("Andar");
             float moveCharacterTimerNormalized = moveCharacterTimer % moveCharacterTime;
             //print(moveCharacterTimerNormalized);
             Vector3 vec3Lerp = Vector3.Lerp(startPosition, destinyPosition, moveCharacterTimerNormalized);
@@ -121,5 +132,14 @@ public class Character : MonoBehaviour
             moveCharacterTimer = 0;
             startMoveCounter = false;
         }
+    }
+    void eliminateCharacter()
+    {
+        Instantiate(destructionObjectPrefabObjectPrefab);
+        Destroy(this);
+    }
+    void characterArrivedDestiny()
+    {
+
     }
 }

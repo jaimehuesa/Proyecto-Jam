@@ -7,6 +7,7 @@ public class GameMainController : MonoBehaviour
     public GameObject characterPrefab;
     public GameObject cellPrefab;
     public GameObject spawnerGameObject;
+    public GameObject[] modelPrefabs3D;
     // parents no hace falta que sean prefabs ya que genera algo de tipo empty
 
     public float cellSize = 1;
@@ -16,16 +17,21 @@ public class GameMainController : MonoBehaviour
     List<GameObject> characters;
     int xColumns = 5; /// num columns
     int yRows = 5;  // num rows
-    float createCharacterTime = 40;
+    float createCharacterTime = 4;
     float createCharacterTimer = 0;
 
     float offsetHeightSpawner = 0.1f;
     float doActionTime = 2;
     float doActionTimer = 0;
+
+    float charactersInDestiny = 0;
+    float charactersEliminated = 0;
     // podemos hacer una matriz ya que en ningun momento va a haber 2 characters en una misma casilla
     void Start()
     {
+       
         characterInstantiationParent = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
+      
         characterInstantiationParent.name = "Characters";
         characters = new List<GameObject>();
         createMap();
@@ -35,12 +41,29 @@ public class GameMainController : MonoBehaviour
     }
     void createCharacter()
     {
+        characterInstantiationParent = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
+        characterInstantiationParent.name = "Characters";
         Vector3 positionSpawner = spawnerGameObject.transform.position;
         GameObject createdCharacter = Instantiate(characterPrefab,
             new Vector3(positionSpawner.x, positionSpawner.y+ offsetHeightSpawner, positionSpawner.z), Quaternion.identity);
-       // Character characterScript = createdCharacter.GetComponent<Character>();
+         Character characterScript = createdCharacter.GetComponent<Character>();
+
+        GameObject created3dModel=instantiateRandom3DModel(createdCharacter);
+        characterScript.my3DModel = created3dModel;
+        characterScript.setMyAnimator();
         createdCharacter.transform.SetParent(characterInstantiationParent.transform, false);
         characters.Add(createdCharacter);
+    }
+    GameObject instantiateRandom3DModel(GameObject characterGameObject)
+    {
+       // characterInstantiationParent.name = "Character";
+        int length = modelPrefabs3D.Length;
+        int rand = Random.Range(0, length);
+        GameObject created3dModel = Instantiate(modelPrefabs3D[rand], new Vector3(0, 0, 0), Quaternion.identity);
+        created3dModel.transform.SetParent(characterGameObject.transform, false);
+        //created3dModel.transform.Rotate(Vector3.up * -90, Space.World);
+        return created3dModel;
+        //print(length);
     }
     void createMap()
     {
@@ -81,6 +104,14 @@ public class GameMainController : MonoBehaviour
     public void characterSaved()
     {
         numCharactersSaved++;
+    }
+    public void increaseScore()
+    {
+        charactersInDestiny++;
+    }
+    public void decreaseScore()
+    {
+        charactersEliminated++;
     }
     // Update is called once per frame
     void Update()
