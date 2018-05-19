@@ -44,8 +44,12 @@ public class GameMainController : MonoBehaviour
         createMap();
         spawnerGameObject = Instantiate(cellPrefab,
             new Vector3(2, 0, 0), Quaternion.identity);
-       // createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
+        // createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
+
+     
     }
+    
+   
 
 
     void createCharacter()
@@ -63,6 +67,7 @@ public class GameMainController : MonoBehaviour
         characterScript.setGameObjectController(this.gameObject);
         createdCharacter.transform.SetParent(characterInstantiationParent.transform, false);
         characters.Add(createdCharacter);
+
     }
     GameObject instantiateRandom3DModel(GameObject characterGameObject)
     {
@@ -134,6 +139,7 @@ public class GameMainController : MonoBehaviour
     {
         //print(characters.Count);
         characters.Remove(characterGameObject);
+        charactersEliminated++;
         //print(characters.Count);
 
     }

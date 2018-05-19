@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*        // how to call from tiles to do the diferent actions in the next turn
+          characterScript.setTheNextActionToDo(Character.ActionsToDo.moveAction);*/
+
+
 public class Character : MonoBehaviour
 {
     public enum disabilites { blind, alzheimer, wheelchair };
     public GameObject destructionObjectPrefabObjectPrefab;
+    public enum ActionsToDo { moveAction, rotationAction, eliminatedAction, victoryAction };
 
     GameMainController gameMainController;
-    enum ActionsToDo { moveAction, rotationAction, eliminatedAction, victoryAction };
     ActionsToDo myCurrentAction = ActionsToDo.moveAction; // por defecto va a moverse
     disabilites myDisability;
     Vector3 startPosition;
@@ -38,6 +42,10 @@ public class Character : MonoBehaviour
     {
         myAnimator = my3DModel.GetComponent<Animator>();
     }
+    public void setTheNextActionToDo(ActionsToDo a_action)
+    {
+        myCurrentAction = a_action;
+    }
     public void setGameObjectController(GameObject gameObject)
     {
         gameMainController = gameObject.GetComponent<GameMainController>();
@@ -61,7 +69,7 @@ public class Character : MonoBehaviour
         }
 
     }
-  
+    
     private disabilites RandomDisabilites()
     {
         return (disabilites)(UnityEngine.Random.Range(0, disabilites.GetNames(typeof(disabilites)).Length));
