@@ -19,6 +19,7 @@ public class GameMainController : MonoBehaviour
     float createCharacterTime = 40;
     float createCharacterTimer = 0;
 
+    float offsetHeightSpawner = 0.1f;
     float doActionTime = 2;
     float doActionTimer = 0;
     // podemos hacer una matriz ya que en ningun momento va a haber 2 characters en una misma casilla
@@ -36,7 +37,7 @@ public class GameMainController : MonoBehaviour
     {
         Vector3 positionSpawner = spawnerGameObject.transform.position;
         GameObject createdCharacter = Instantiate(characterPrefab,
-            new Vector3(positionSpawner.x, positionSpawner.y, positionSpawner.z), Quaternion.identity);
+            new Vector3(positionSpawner.x, positionSpawner.y+ offsetHeightSpawner, positionSpawner.z), Quaternion.identity);
        // Character characterScript = createdCharacter.GetComponent<Character>();
         createdCharacter.transform.SetParent(characterInstantiationParent.transform, false);
         characters.Add(createdCharacter);
