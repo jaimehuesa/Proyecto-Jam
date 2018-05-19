@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33737810860002718}
   - component: {fileID: 65157254576297062}
   - component: {fileID: 23236290812452770}
-  - component: {fileID: 114831016699172088}
+  - component: {fileID: 114549970136484276}
   m_Layer: 0
   m_Name: CellPrefabTest
   m_TagString: Untagged
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114831016699172088
+--- !u!114 &114549970136484276
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -104,9 +104,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1227383311740922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5142c8f1fc7ff44997e4d3631af4cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 50b41f714a344b44097f8fe6bf474567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 0, y: 0, z: 0}
-  xDirection: 1
-  yDirection: 0
+  characterPosYCell: 0.6
