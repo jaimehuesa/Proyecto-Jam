@@ -52,15 +52,29 @@ public class GenericObstacleCell : MonoBehaviour {
 	void OnTriggerEnter(Collider collider){
 		if(collider.tag == "Character"){
 			Character characterInCell = collider.gameObject.GetComponent<Character>();
+			Debug.Log(characterInCell.getMyDisability());
 			switch(characterInCell.getMyDisability()){
-				case Character.disabilites.wheelchair: /*characterInCell.CanPass(CanBeOvercome(1));*/ break;
-				case Character.disabilites.blind: /*characterInCell.CanPass(CanBeOvercome(2));*/ break;
-				case Character.disabilites.alzheimer: /*characterInCell.CanPass(CanBeOvercome(3));*/ break;
-				default: Debug.LogError("The collider character has a disability not included int this script"); break;
+				case Character.disabilites.wheelchair: 
+					if(!CanBeOvercome(1)){
+						characterInCell.eliminateCharacter();
+					}
+					break;
+				case Character.disabilites.blind: 
+					if(!CanBeOvercome(2)){
+						characterInCell.eliminateCharacter();
+					}
+					break;
+				case Character.disabilites.alzheimer:
+					if(!CanBeOvercome(3)){
+						characterInCell.eliminateCharacter();
+					}
+					break;
+				default: 
+					Debug.LogError("The collider character has a disability not included int this script");
+					break;
 			}
 			isObstacle = true;
 		}
-		Debug.LogError("Me falta el metodo para decirle al character si debe pasar o no");
 	}
 
 	private bool CanBeOvercome(int dysabledType){
@@ -71,27 +85,33 @@ public class GenericObstacleCell : MonoBehaviour {
 						//gameManager.Penalty();
 						Debug.LogError("Falta un metodo para añadir multas al gameManager");
 					}
+					TurnIntoObstacle();
 					return false;
-				}else
+				}else{
 					return true;
+				}
 			case 2: 
 				if (isBlindObstacle){
 					if(!isObstacle){
 						//gameManager.Penalty();
 						Debug.LogError("Falta un metodo para añadir multas al gameManager");
 					}
+					TurnIntoObstacle();
 					return false;
-				}else
+				}else{
 					return true;
+				}
 			case 3: 
 				if (isAlzheimerObstacle){
 					if(!isObstacle){
 						//gameManager.Penalty();
 						Debug.LogError("Falta un metodo para añadir multas al gameManager");
 					}
+					TurnIntoObstacle();
 					return false;
-				}else
+				}else{
 					return true;				
+				}
 			default: Debug.LogError("The dysabledType parameter passed is not valid"); return true;
 		}
 	}
@@ -118,13 +138,7 @@ public class GenericObstacleCell : MonoBehaviour {
 				case 3: EnablePrefab(5); break;
 				default: Debug.LogError("Wrong discapacity solution value"); break;
 			}
-			StartCoroutine(ResetObstacleDebug());
 		}		
-	}
-
-	private IEnumerator ResetObstacleDebug(){
-		yield return new WaitForSeconds(2f);
-		TurnIntoObstacle();
 	}
 
 	private void EnablePrefab(int childNum){
@@ -134,9 +148,9 @@ public class GenericObstacleCell : MonoBehaviour {
 		childActive = childNum;
 
 		switch(childActive){
-			case 0: isWheelchairObstacle = true; break;
-			case 1: isBlindObstacle = true; break;
-			case 2: isAlzheimerObstacle = true; break;
+			case 0: isWheelchairObstacle = true; isBlindObstacle = false; isAlzheimerObstacle = false; break;
+			case 1: isWheelchairObstacle = false; isBlindObstacle = true; isAlzheimerObstacle = false; break;
+			case 2: isWheelchairObstacle = false; isBlindObstacle = false; isAlzheimerObstacle = true; break;
 			case 3: isWheelchairObstacle = false; break;
 			case 4: isBlindObstacle = false; break;
 			case 5: isAlzheimerObstacle = false; break;

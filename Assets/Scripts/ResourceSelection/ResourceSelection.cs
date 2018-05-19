@@ -20,7 +20,7 @@ public class ResourceSelection : MonoBehaviour {
 		currentSolution = solutions [0];
 		solution1UI.SetActive (true);
 		currentSolutionUI = solution1UI;
-		Debug.Log ("Primera solucion seleccionada");
+		//Debug.Log ("Primera solucion seleccionada");
 		currentIntSolution = 1;
 	}
 	

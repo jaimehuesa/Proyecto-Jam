@@ -8,13 +8,13 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public enum disabilites { blind, alzheimer, wheelchair };
+    public enum disabilites {  alzheimer, blind, wheelchair };
     public GameObject destructionObjectPrefabObjectPrefab;
     public enum ActionsToDo { moveAction, rotationAction, eliminatedAction, victoryAction };
 
     GameMainController gameMainController;
     ActionsToDo myCurrentAction = ActionsToDo.moveAction; // por defecto va a moverse
-    disabilites myDisability;
+    public disabilites myDisability;
     Vector3 startPosition;
     Vector3 destinyPosition;
     Quaternion startRotation;
@@ -35,7 +35,7 @@ public class Character : MonoBehaviour
     public GameObject my3DModel;
     void Start()
     {
-        myDisability = disabilites.blind;
+        //myDisability = disabilites.blind;
      
     }
     public void setMyAnimator()
@@ -147,7 +147,7 @@ public class Character : MonoBehaviour
             startMoveCounter = false;
         }
     }
-    void eliminateCharacter()
+    public void eliminateCharacter()
     {
         Instantiate(destructionObjectPrefabObjectPrefab,transform.position,Quaternion.identity);
         gameMainController.removeCharacterFromList(this.gameObject);

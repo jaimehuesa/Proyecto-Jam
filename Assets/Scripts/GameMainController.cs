@@ -77,8 +77,13 @@ public class GameMainController : MonoBehaviour
         int length = modelPrefabs3D.Length;
         int rand = Random.Range(0, length);
         GameObject created3dModel = Instantiate(modelPrefabs3D[rand], new Vector3(0, 0, 0), Quaternion.identity);
+        Character characterScript = characterGameObject.GetComponent<Character>();
+        //characterScript.myDisability = (Character.disabilites) rand;
+        //characterScript.myDisability = Character.disabilites.alzheimer; 
         created3dModel.transform.SetParent(characterGameObject.transform, false);
         //created3dModel.transform.Rotate(Vector3.up * -90, Space.World);
+        characterGameObject.GetComponent<Character>().myDisability = (Character.disabilites) rand;
+        //Debug.Log("-> " + (Character.disabilites) rand + " - " +characterGameObject.GetComponent<Character>().myDisability);
         return created3dModel;
         //print(length);
     }
