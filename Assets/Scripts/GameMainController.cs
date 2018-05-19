@@ -17,7 +17,9 @@ public class GameMainController : MonoBehaviour
     List<GameObject> characters;
     int xColumns = 5; /// num columns
     int yRows = 5;  // num rows
-    float createCharacterTime = 4;
+    int ticks = 0;
+    int ticksToCreate = 2;
+    //float createCharacterTime = 4;
     float createCharacterTimer = 0;
 
     float offsetHeightSpawner = 0.1f;
@@ -26,37 +28,45 @@ public class GameMainController : MonoBehaviour
 
     float charactersInDestiny = 0;
     float charactersEliminated = 0;
+
+
+
     // podemos hacer una matriz ya que en ningun momento va a haber 2 characters en una misma casilla
+
+
     void Start()
     {
-       
+
         characterInstantiationParent = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
-      
+
         characterInstantiationParent.name = "Characters";
         characters = new List<GameObject>();
         createMap();
         spawnerGameObject = Instantiate(cellPrefab,
-            new Vector3(2,0,0), Quaternion.identity);
-        createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
+            new Vector3(2, 0, 0), Quaternion.identity);
+       // createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
     }
+
+
     void createCharacter()
     {
         characterInstantiationParent = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
         characterInstantiationParent.name = "Characters";
         Vector3 positionSpawner = spawnerGameObject.transform.position;
         GameObject createdCharacter = Instantiate(characterPrefab,
-            new Vector3(positionSpawner.x, positionSpawner.y+ offsetHeightSpawner, positionSpawner.z), Quaternion.identity);
-         Character characterScript = createdCharacter.GetComponent<Character>();
+            new Vector3(positionSpawner.x, positionSpawner.y + offsetHeightSpawner, positionSpawner.z), Quaternion.identity);
+        Character characterScript = createdCharacter.GetComponent<Character>();
 
-        GameObject created3dModel=instantiateRandom3DModel(createdCharacter);
+        GameObject created3dModel = instantiateRandom3DModel(createdCharacter);
         characterScript.my3DModel = created3dModel;
         characterScript.setMyAnimator();
+        characterScript.setGameObjectController(this.gameObject);
         createdCharacter.transform.SetParent(characterInstantiationParent.transform, false);
         characters.Add(createdCharacter);
     }
     GameObject instantiateRandom3DModel(GameObject characterGameObject)
     {
-       // characterInstantiationParent.name = "Character";
+        // characterInstantiationParent.name = "Character";
         int length = modelPrefabs3D.Length;
         int rand = Random.Range(0, length);
         GameObject created3dModel = Instantiate(modelPrefabs3D[rand], new Vector3(0, 0, 0), Quaternion.identity);
@@ -94,10 +104,17 @@ public class GameMainController : MonoBehaviour
     void callToAction()
     {
         //showDisabilities();
-        foreach (GameObject guy in characters)
+        //foreach (GameObject guy in characters)
+        for (int i = 0; i < characters.Count; i++)
         {
+            GameObject guy = characters[i];
             Character character = guy.GetComponent<Character>();
             character.doAction();
+        }
+        ticks++;
+        if (ticks % ticksToCreate == 0)
+        {
+            createCharacter();
         }
 
     }
@@ -113,15 +130,22 @@ public class GameMainController : MonoBehaviour
     {
         charactersEliminated++;
     }
+    public void removeCharacterFromList(GameObject characterGameObject)
+    {
+        //print(characters.Count);
+        characters.Remove(characterGameObject);
+        //print(characters.Count);
+
+    }
     // Update is called once per frame
     void Update()
     {
-        createCharacterTimer += Time.deltaTime;
-        if (createCharacterTimer > createCharacterTime)
+        //createCharacterTimer += Time.deltaTime;
+        /*if (createCharacterTimer > createCharacterTime)
         {
             createCharacter();
             createCharacterTimer = 0;
-        }
+        }*/
         if (doActionTimer > doActionTime)
         {
             doActionTimer = 0;

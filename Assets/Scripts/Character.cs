@@ -6,8 +6,8 @@ public class Character : MonoBehaviour
 {
     public enum disabilites { blind, alzheimer, wheelchair };
     public GameObject destructionObjectPrefabObjectPrefab;
-  
 
+    GameMainController gameMainController;
     enum ActionsToDo { moveAction, rotationAction, eliminatedAction, victoryAction };
     ActionsToDo myCurrentAction = ActionsToDo.moveAction; // por defecto va a moverse
     disabilites myDisability;
@@ -37,6 +37,10 @@ public class Character : MonoBehaviour
     public void setMyAnimator()
     {
         myAnimator = my3DModel.GetComponent<Animator>();
+    }
+    public void setGameObjectController(GameObject gameObject)
+    {
+        gameMainController = gameObject.GetComponent<GameMainController>();
     }
     public disabilites getMyDisability()
     {
@@ -68,13 +72,13 @@ public class Character : MonoBehaviour
         return (ActionsToDo)(UnityEngine.Random.Range(0, ActionsToDo.GetNames(typeof(ActionsToDo)).Length));
 
     }
-    int i = 0;
+    //int i = 0;
     public void doAction()
     {
         myCurrentAction = randomAction();
         //print(myCurrentAction);
         // myCurrentAction = (ActionsToDo)0;
-        // myCurrentAction = ActionsToDo.rotationAction;
+        //myCurrentAction = ActionsToDo.moveAction;
         startPosition = this.transform.position;
         destinyPosition = this.transform.position;
         startRotation = this.transform.rotation;
@@ -92,6 +96,8 @@ public class Character : MonoBehaviour
                 destinyRotation*= Quaternion.Euler(0, rotateYValue, 0);
                 startMoveCounter = true;
                 break;
+            case    ActionsToDo.eliminatedAction:
+                eliminateCharacter(); break;
         }
       //  print(startTransformation.position + ", " + destinyTransformation.position);
     }
@@ -135,8 +141,9 @@ public class Character : MonoBehaviour
     }
     void eliminateCharacter()
     {
-        Instantiate(destructionObjectPrefabObjectPrefab);
-        Destroy(this);
+        Instantiate(destructionObjectPrefabObjectPrefab,transform.position,Quaternion.identity);
+        gameMainController.removeCharacterFromList(this.gameObject);
+        Destroy(this.gameObject);
     }
     void characterArrivedDestiny()
     {
