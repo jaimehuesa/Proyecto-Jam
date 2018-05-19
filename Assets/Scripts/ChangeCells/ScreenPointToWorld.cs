@@ -6,10 +6,12 @@ public class ScreenPointToWorld : MonoBehaviour {
 	public Camera camara;
 	private Ray ray;
 	private RaycastHit hitInfo;
+	private ResourceSelection resourceSelection;
+	private GameObject obstacleCell;
 
 	// Use this for initialization
 	void Start () {
-		
+		resourceSelection = GetComponent<ResourceSelection> ();
 		
 	}
 	
@@ -21,6 +23,9 @@ public class ScreenPointToWorld : MonoBehaviour {
 
 			if (Physics.Raycast(ray, out hitInfo, 100f)){
 				if (hitInfo.collider.CompareTag ("Obstacle")) {
+					obstacleCell = hitInfo.collider.gameObject;
+					ChangeCellSolution (obstacleCell.transform);
+					Destroy (obstacleCell);
 					Debug.Log ("Cambiar obstaculo");
 				} else {
 					Debug.Log ("No puedes hacer nada");
@@ -29,4 +34,10 @@ public class ScreenPointToWorld : MonoBehaviour {
 
 		}
 	}
+
+	void ChangeCellSolution(Transform transf){
+		Instantiate (resourceSelection.currentSolution, transf.position, transf.rotation);
+		
+	}
+
 }

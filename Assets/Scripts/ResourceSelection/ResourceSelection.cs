@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ResourceSelection : MonoBehaviour {
 	public GameObject[] solutions;
-	private GameObject currentSolution;
+	[HideInInspector]
+	public GameObject currentSolution;
 	// Use this for initialization
 	void Start () {
 		currentSolution = solutions [0];

@@ -398,3 +398,4 @@ MonoBehaviour:
   - {fileID: 1194563035861664, guid: af9eebcdf5bdecf4ab0adaee92bb4833, type: 2}
   - {fileID: 1194563035861664, guid: cb63b749714fd1d439343225f6baea11, type: 2}
   - {fileID: 1194563035861664, guid: b4f4282e235e4d04a92ef7e242807c27, type: 2}
+  currentSolution: {fileID: 0}
