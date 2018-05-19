@@ -11,6 +11,8 @@ public class ResourceSelection : MonoBehaviour {
 
 	[HideInInspector]
 	public GameObject currentSolution;
+	// 1 wheelChair, 2 blind, 3 alzheimer
+	public int currentIntSolution;
 	private GameObject currentSolutionUI;
 
 	// Use this for initialization
@@ -19,6 +21,7 @@ public class ResourceSelection : MonoBehaviour {
 		solution1UI.SetActive (true);
 		currentSolutionUI = solution1UI;
 		Debug.Log ("Primera solucion seleccionada");
+		currentIntSolution = 1;
 	}
 	
 	// Update is called once per frame
@@ -29,6 +32,7 @@ public class ResourceSelection : MonoBehaviour {
 			solution1UI.SetActive (true);
 			currentSolutionUI = solution1UI;
 			Debug.Log("Primera solucion seleccionada");
+			currentIntSolution = 1;
 		}
 		if(Input.GetKey("2")){
 			currentSolution = solutions [1];
@@ -36,6 +40,7 @@ public class ResourceSelection : MonoBehaviour {
 			solution2UI.SetActive (true);
 			currentSolutionUI = solution2UI;
 			Debug.Log("Segunda solucion seleccionada");
+			currentIntSolution = 2;
 		}
 		if(Input.GetKey("3")){
 			currentSolution = solutions [2];
@@ -43,6 +48,7 @@ public class ResourceSelection : MonoBehaviour {
 			solution3UI.SetActive (true);
 			currentSolutionUI = solution3UI;
 			Debug.Log("Tercera solucion seleccionada");
+			currentIntSolution = 3;
 		}
 
 	}

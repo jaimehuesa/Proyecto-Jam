@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33558595198017238}
   - component: {fileID: 65362426774289984}
   - component: {fileID: 23884884485802716}
+  - component: {fileID: 114797451150618174}
   m_Layer: 0
   m_Name: ObstacleCell
   m_TagString: Obstacle
@@ -95,3 +96,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114797451150618174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194563035861664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980706337e2485544b135478b2f04375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterPosYCell: 0.6
+  wheelchairObstacle: 0
+  blindObstacle: 0
+  alzheimerObstacle: 0
+  wc_ObsModel: {fileID: 0}
+  blind_ObsModel: {fileID: 0}
+  alz_ObsModel: {fileID: 0}
+  empty_ObsModel: {fileID: 0}
+  wc_SolModel: {fileID: 0}
+  blind_SolModel: {fileID: 0}
+  alz_SolModel: {fileID: 0}
+  modelPlace: {fileID: 0}

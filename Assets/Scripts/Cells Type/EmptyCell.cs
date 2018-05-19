@@ -9,7 +9,7 @@ public class EmptyCell : Cell {
 		turnTo = -1;
 	}
 	
-	public override bool CanBeOvercome(int dysabledType){
+	protected override bool CanBeOvercome(int dysabledType){
 		return true;
 	}
 }

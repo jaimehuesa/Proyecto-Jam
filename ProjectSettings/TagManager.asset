@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Canvas
+  - Character
   layers:
   - Default
   - TransparentFX

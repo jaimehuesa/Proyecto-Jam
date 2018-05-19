@@ -36,7 +36,7 @@ public abstract class Cell : MonoBehaviour {
     /// else returns false
 	/// </summary>
 	/// <param name="disabledType"> Disability type -> 1 WheelChair, 2 Blind, 3 Alzheimer.</param>
-	public abstract bool CanBeOvercome(int disabledType);
+	protected abstract bool CanBeOvercome(int disabledType);
 
 	/// <summary>
 	/// Returns true if the disabled person has to turn left

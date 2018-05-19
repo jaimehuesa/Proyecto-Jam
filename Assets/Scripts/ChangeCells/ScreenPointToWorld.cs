@@ -11,8 +11,7 @@ public class ScreenPointToWorld : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		resourceSelection = GetComponent<ResourceSelection> ();
-		
+		resourceSelection = GetComponent<ResourceSelection> ();	
 	}
 	
 	// Update is called once per frame
@@ -24,9 +23,10 @@ public class ScreenPointToWorld : MonoBehaviour {
 			if (Physics.Raycast(ray, out hitInfo, 100f)){
 				if (hitInfo.collider.CompareTag ("Obstacle")) {
 					obstacleCell = hitInfo.collider.gameObject;
-					ChangeCellSolution (obstacleCell.transform);
-					Destroy (obstacleCell);
-					Debug.Log ("Cambiar obstaculo");
+					obstacleCell.GetComponent<GenericObstacleCell>().PlaceSolution(resourceSelection.currentIntSolution);
+					//ChangeCellSolution (obstacleCell.transform);
+					//Destroy (obstacleCell);
+					//Debug.Log ("Cambiar obstaculo");
 				} else {
 					Debug.Log ("No puedes hacer nada");
 				}
