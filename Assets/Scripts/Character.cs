@@ -5,11 +5,16 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public enum disabilites { blind, alzheimer, wheelchair };
-    enum actionsToDo { moveAction, rotationAction, disappear };
-    actionsToDo myCurrentAction = actionsToDo.moveAction; // por defecto va a moverse
+    enum ActionsToDo { moveAction, rotationAction, disappear };
+    ActionsToDo myCurrentAction = ActionsToDo.moveAction; // por defecto va a moverse
     disabilites myDisability;
-    Vector3 startPosition3D;
-    Vector3 destinyPosition3D;
+    Vector3 startPosition;
+    Vector3 destinyPosition;
+    Quaternion startRotation;
+    Quaternion destinyRotation;
+
+
+
     float moveDistance = 1;
     float moveCharacterTime = 1;
     float moveCharacterTimer = 0;
@@ -34,33 +39,62 @@ public class Character : MonoBehaviour
         {
             switch (myCurrentAction)
             {
-                case actionsToDo.moveAction:
+                case ActionsToDo.moveAction:
                     move(); break;
-                case actionsToDo.rotationAction: rotate();  break;
+                case ActionsToDo.rotationAction: rotate();  break;
             }
             moveCharacterTimer += Time.deltaTime;
         }
 
     }
+
+    private disabilites RandomDisabilites()
+    {
+        return (disabilites)(UnityEngine.Random.Range(0, disabilites.GetNames(typeof(disabilites)).Length));
+    }
+
+    private ActionsToDo randomAction()
+    {
+        return (ActionsToDo)(UnityEngine.Random.Range(0, ActionsToDo.GetNames(typeof(ActionsToDo)).Length));
+
+    }
     public void doAction()
     {
+        //print(randomAction());
+        myCurrentAction = randomAction();
+        //myCurrentAction = ActionsToDo.rotationAction;
+        startPosition = this.transform.position;
+        destinyPosition = this.transform.position;
+        startRotation = this.transform.rotation;
+        destinyRotation =transform.rotation;
+        Vector3 pos = this.transform.position;
+        Quaternion rotation = this.transform.rotation;
         switch (myCurrentAction)
         {
-            case actionsToDo.moveAction:
-                startPosition3D = transform.position;
-                destinyPosition3D = startPosition3D + Vector3.forward * moveDistance;
+            case ActionsToDo.moveAction:
+                destinyPosition = startPosition + Vector3.forward * moveDistance;
+                startMoveCounter = true;
+                break;
+            case ActionsToDo.rotationAction:
+                //destinyTransformation.Rotate(Vector3.up * rotateYValue, Space.World);
+                destinyRotation*= Quaternion.Euler(0, rotateYValue, 0);
                 startMoveCounter = true;
                 break;
         }
-
+      //  print(startTransformation.position + ", " + destinyTransformation.position);
     }
     void move()
     {
+        
         if (moveCharacterTimer < moveCharacterTime)
         {
             float moveCharacterTimerNormalized = moveCharacterTimer % moveCharacterTime;
-            Vector3 vec3Lerp = Vector3.Lerp(startPosition3D, destinyPosition3D, moveCharacterTimer);
+            //print(moveCharacterTimerNormalized);
+            Vector3 vec3Lerp = Vector3.Lerp(startPosition, destinyPosition, moveCharacterTimerNormalized);
             transform.position = vec3Lerp;
+            
+            //transform.position += Vector3.forward * Time.deltaTime;
+
         }
         else
         {
@@ -73,10 +107,10 @@ public class Character : MonoBehaviour
         if (moveCharacterTimer < moveCharacterTime)
         {
             float rotateCharacterTimerNormalized = moveCharacterTimer % moveCharacterTime;
-            Transform toRotation= transform;
-            toRotation.Rotate(Vector3.up * Time.deltaTime, Space.World);
-            transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation, rotateCharacterTimerNormalized);
-           // transform.position = vec3Lerp;
+           // print(transform.rotation);
+            transform.rotation = Quaternion.Lerp(startRotation, destinyRotation, rotateCharacterTimerNormalized);
+            //Quaternion.Euler(0, rotateYValue, 0);
+            // transform.position = vec3Lerp;
         }
         else
         {

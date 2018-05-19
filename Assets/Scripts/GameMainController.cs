@@ -16,7 +16,7 @@ public class GameMainController : MonoBehaviour
     List<GameObject> characters;
     int xColumns = 5; /// num columns
     int yRows = 5;  // num rows
-    float createCharacterTime = 4;
+    float createCharacterTime = 40;
     float createCharacterTimer = 0;
 
     float doActionTime = 2;
@@ -69,7 +69,7 @@ public class GameMainController : MonoBehaviour
     }
     void callToAction()
     {
-        showDisabilities();
+        //showDisabilities();
         foreach (GameObject guy in characters)
         {
             Character character = guy.GetComponent<Character>();

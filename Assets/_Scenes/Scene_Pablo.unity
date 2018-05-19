@@ -287,8 +287,8 @@ MonoBehaviour:
   characterPrefab: {fileID: 1793213962064464, guid: 1ea53c991c884c44895477d51b53af50,
     type: 2}
   cellPrefab: {fileID: 1227383311740922, guid: c7f82bab1b0c9e74c87a78ba13ad6742, type: 2}
-  mapPrefab: {fileID: 1808713611764586, guid: 82cf66c15db4f424e90602945912170c, type: 2}
-  mapInstantiation: {fileID: 0}
+  spawnerGameObject: {fileID: 0}
+  cellSize: 1
 --- !u!4 &1709814683
 Transform:
   m_ObjectHideFlags: 0
