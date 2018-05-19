@@ -34,3 +34,11 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+.vscode/settings.json
+Assets/AssetsFromAssetStore.meta
+Assets/AssetsFromAssetStore/AssetsFromAssetStore.txt.meta
+Assets/AssetsFromOurTeam.meta
+Assets/AssetsFromAssetStore/AssetsFromAssetStore.txt.meta
+Assets/AssetsFromOurTeam/AssetsFromOurTeam.txt.meta
+Assets/AssetsFromOurTeam.meta
+Assets/AssetsFromOurTeam/AssetsFromOurTeam.txt.meta
