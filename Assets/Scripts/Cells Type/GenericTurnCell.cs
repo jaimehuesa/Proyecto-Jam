@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericTurnCell : Cell {
+public class GenericTurnCell : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	private bool leftTurn;
+
+	void OnTriggerEnter(Collider collider){
+		if(collider.tag == "Character"){
+			if(leftTurn){
+				//Enviar mensaje izquierda
+			}else{
+				//Enviar mensaje derecha
+			}
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }
