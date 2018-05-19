@@ -86,7 +86,7 @@ public class Character : MonoBehaviour
         myCurrentAction = randomAction();
         //print(myCurrentAction);
         // myCurrentAction = (ActionsToDo)0;
-        //myCurrentAction = ActionsToDo.moveAction;
+        myCurrentAction = ActionsToDo.moveAction;
         startPosition = this.transform.position;
         destinyPosition = this.transform.position;
         startRotation = this.transform.rotation;

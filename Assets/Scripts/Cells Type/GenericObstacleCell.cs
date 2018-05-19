@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericObstacleCell : Cell {
+public class GenericObstacleCell : MonoBehaviour {
 
 	public bool isWheelchairObstacle, isBlindObstacle, isAlzheimerObstacle;
 	private bool oldWheelchairObs, oldBlindObs, oldAlzheimerObs;
@@ -63,11 +63,35 @@ public class GenericObstacleCell : Cell {
 		Debug.LogError("Me falta el metodo para decirle al character si debe pasar o no");
 	}
 
-	protected override bool CanBeOvercome(int dysabledType){
+	private bool CanBeOvercome(int dysabledType){
 		switch(dysabledType){
-			case 1: if (isWheelchairObstacle) return false; else return true;
-			case 2: if (isBlindObstacle) return false; else return true;
-			case 3: if (isAlzheimerObstacle) return false; else return true;
+			case 1: 
+				if(isWheelchairObstacle){
+					if(!isObstacle){
+						//gameManager.Penalty();
+						Debug.LogError("Falta un metodo para añadir multas al gameManager");
+					}
+					return false;
+				}else
+					return true;
+			case 2: 
+				if (isBlindObstacle){
+					if(!isObstacle){
+						//gameManager.Penalty();
+						Debug.LogError("Falta un metodo para añadir multas al gameManager");
+					}
+					return false;
+				}else
+					return true;
+			case 3: 
+				if (isAlzheimerObstacle){
+					if(!isObstacle){
+						//gameManager.Penalty();
+						Debug.LogError("Falta un metodo para añadir multas al gameManager");
+					}
+					return false;
+				}else
+					return true;				
 			default: Debug.LogError("The dysabledType parameter passed is not valid"); return true;
 		}
 	}
