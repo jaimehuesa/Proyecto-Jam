@@ -59,9 +59,11 @@ public class GameMainController : MonoBehaviour
         Vector3 positionSpawner = spawnerGameObject.transform.position;
         GameObject createdCharacter = Instantiate(characterPrefab,
             new Vector3(positionSpawner.x, positionSpawner.y + offsetHeightSpawner, positionSpawner.z), Quaternion.identity);
+        createdCharacter.transform.rotation = spawnerGameObject.transform.rotation;
         Character characterScript = createdCharacter.GetComponent<Character>();
 
         GameObject created3dModel = instantiateRandom3DModel(createdCharacter);
+        //created3dModel.transform.rotation = spawnerGameObject.transform.rotation;
         characterScript.my3DModel = created3dModel;
         characterScript.setMyAnimator();
         characterScript.setGameObjectController(this.gameObject);
