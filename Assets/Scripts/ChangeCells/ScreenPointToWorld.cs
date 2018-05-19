@@ -36,8 +36,7 @@ public class ScreenPointToWorld : MonoBehaviour {
 	}
 
 	void ChangeCellSolution(Transform transf){
-		Instantiate (resourceSelection.currentSolution, transf.position, transf.rotation);
-		
+		Instantiate (resourceSelection.currentSolution, transf.position, transf.rotation);	
 	}
 
 }
