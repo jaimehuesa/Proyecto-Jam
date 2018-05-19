@@ -16,7 +16,11 @@ public class GenericObstacleCell : MonoBehaviour {
 	///</summary>
 	private GameObject[] child = new GameObject[6];
 	
+	[SerializeField]
 	private bool isObstacle;
+	private bool preparePenalty = false;
+	private bool characterInside = false;
+	private bool disableUpdate = false; // No se hacen preguntas
 
 	void Start(){
 		isObstacle = true;
@@ -28,29 +32,33 @@ public class GenericObstacleCell : MonoBehaviour {
 		child[4] = this.transform.GetChild(4).gameObject;
 		child[5] = this.transform.GetChild(5).gameObject;
 
-		EnablePrefab(childActive);		
+		TurnIntoObstacle();	
 	}
 
+/*
 	void Update(){
-		if(isWheelchairObstacle != oldWheelchairObs || isBlindObstacle != oldBlindObs || isAlzheimerObstacle != oldAlzheimerObs){
-			PlaceObstacle();
+		if(!disableUpdate){
+			if(isWheelchairObstacle != oldWheelchairObs || isBlindObstacle != oldBlindObs || isAlzheimerObstacle != oldAlzheimerObs){
+				PlaceObstacle();
+			}
+			oldWheelchairObs = isWheelchairObstacle;
+			oldBlindObs = isBlindObstacle;
+			oldAlzheimerObs = isAlzheimerObstacle;
 		}
-		oldWheelchairObs = isWheelchairObstacle;
-		oldBlindObs = isBlindObstacle;
-		oldAlzheimerObs = isAlzheimerObstacle;
 	}
+*/
 
 	public void TurnIntoObstacle(){
-		isObstacle = true;
-		for(int i = 0 ; i < 100 ; i++){
-			Debug.Log(Random.Range(0, 3));
-		}
+		isWheelchairObstacle = false; isBlindObstacle = false; isAlzheimerObstacle = false;
 
+		isObstacle = true;
+	
 		EnablePrefab(Random.Range(0, 3));
 	}
 
 	void OnTriggerEnter(Collider collider){
 		if(collider.tag == "Character"){
+			characterInside = true;
 			Character characterInCell = collider.gameObject.GetComponent<Character>();
 			Debug.Log(characterInCell.getMyDisability());
 			switch(characterInCell.getMyDisability()){
@@ -73,7 +81,21 @@ public class GenericObstacleCell : MonoBehaviour {
 					Debug.LogError("The collider character has a disability not included int this script");
 					break;
 			}
-			isObstacle = true;
+		}
+	}
+
+	void OnTriggerExit(Collider collider){
+		if(collider.tag == "Character"){
+			characterInside = false;
+		}
+		Debug.Log("EXIT");
+		if(preparePenalty){
+			preparePenalty = false;
+			Debug.Log("TO DO => MULTA");
+			//gameManager.Penalty();
+		}
+		if(!isObstacle){
+			TurnIntoObstacle();
 		}
 	}
 
@@ -81,33 +103,18 @@ public class GenericObstacleCell : MonoBehaviour {
 		switch(dysabledType){
 			case 1: 
 				if(isWheelchairObstacle){
-					if(!isObstacle){
-						//gameManager.Penalty();
-						Debug.LogError("Falta un metodo para añadir multas al gameManager");
-					}
-					TurnIntoObstacle();
 					return false;
 				}else{
 					return true;
 				}
 			case 2: 
 				if (isBlindObstacle){
-					if(!isObstacle){
-						//gameManager.Penalty();
-						Debug.LogError("Falta un metodo para añadir multas al gameManager");
-					}
-					TurnIntoObstacle();
 					return false;
 				}else{
 					return true;
 				}
 			case 3: 
 				if (isAlzheimerObstacle){
-					if(!isObstacle){
-						//gameManager.Penalty();
-						Debug.LogError("Falta un metodo para añadir multas al gameManager");
-					}
-					TurnIntoObstacle();
 					return false;
 				}else{
 					return true;				
@@ -129,7 +136,7 @@ public class GenericObstacleCell : MonoBehaviour {
 	}
 
 	public void PlaceSolution(int solution){
-		if(isObstacle){
+		if(isObstacle && !characterInside){
 			isObstacle = false;
 
 			switch(solution){
@@ -142,15 +149,23 @@ public class GenericObstacleCell : MonoBehaviour {
 	}
 
 	private void EnablePrefab(int childNum){
-		child[childActive].SetActive(false);
+		//Hard reset porq no se
+		for(int i = 0 ; i < 6 ; i++){
+			child[i].SetActive(false);
+		}		
+
+		// esto es por si pones la q no corresponde creo, lo he escrito hace 5 min y no lo tengo claro
+		//if(childNum > 2 && childActive + 3 != childNum){
+		//	preparePenalty = true;
+		//}
 
 		child[childNum].SetActive(true);
 		childActive = childNum;
 
 		switch(childActive){
-			case 0: isWheelchairObstacle = true; isBlindObstacle = false; isAlzheimerObstacle = false; break;
-			case 1: isWheelchairObstacle = false; isBlindObstacle = true; isAlzheimerObstacle = false; break;
-			case 2: isWheelchairObstacle = false; isBlindObstacle = false; isAlzheimerObstacle = true; break;
+			case 0: isWheelchairObstacle = true; break;
+			case 1: isBlindObstacle = true; break;
+			case 2: isAlzheimerObstacle = true; break;
 			case 3: isWheelchairObstacle = false; break;
 			case 4: isBlindObstacle = false; break;
 			case 5: isAlzheimerObstacle = false; break;

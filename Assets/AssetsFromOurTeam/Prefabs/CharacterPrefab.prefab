@@ -51,7 +51,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
+  m_Size: {x: 0.8, y: 2, z: 0.8}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &114018531349501788
 MonoBehaviour:
@@ -66,4 +66,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructionObjectPrefabObjectPrefab: {fileID: 1863759710211750, guid: 4c0dc9587412d9846b273292f46d2f35,
     type: 2}
+  myDisability: 0
   my3DModel: {fileID: 0}
