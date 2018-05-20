@@ -11,8 +11,7 @@ public class Character : MonoBehaviour
     public enum disabilites {  alzheimer, blind, wheelchair };
     public GameObject destructionObjectPrefab;
     public GameObject arrivedObjectPrefab;
-    public GameObject penaltyObjectPrefab;
-    public enum ActionsToDo { moveAction, rotationAction, eliminatedAction, arrivedAction,penalizationAction };
+    public enum ActionsToDo { moveAction, rotationAction, eliminatedAction, victoryAction };
 
     GameMainController gameMainController;
     ActionsToDo myCurrentAction = ActionsToDo.moveAction; // por defecto va a moverse
@@ -80,28 +79,21 @@ public class Character : MonoBehaviour
     private ActionsToDo randomAction()
     {
         return (ActionsToDo)(UnityEngine.Random.Range(0, ActionsToDo.GetNames(typeof(ActionsToDo)).Length));
-        //return (ActionsToDo)(UnityEngine.Random.Range(0, 2));
-    }
-    private ActionsToDo randomMovement()
-    {
-        //return (ActionsToDo)(UnityEngine.Random.Range(0, ActionsToDo.GetNames(typeof(ActionsToDo)).Length));
-        return (ActionsToDo)(UnityEngine.Random.Range(0, 2));
+
     }
     //int i = 0;
     public void doAction()
     {
         myCurrentAction = randomAction();
-        //myCurrentAction = randomMovement();
         //print(myCurrentAction);
         // myCurrentAction = (ActionsToDo)0;
-       // myCurrentAction = ActionsToDo.eliminatedAction;
+        myCurrentAction = ActionsToDo.moveAction;
         startPosition = this.transform.position;
         destinyPosition = this.transform.position;
         startRotation = this.transform.rotation;
         destinyRotation =transform.rotation;
         Vector3 pos = this.transform.position;
         Quaternion rotation = this.transform.rotation;
-
         switch (myCurrentAction)
         {
             case ActionsToDo.moveAction:
@@ -113,13 +105,8 @@ public class Character : MonoBehaviour
                 destinyRotation*= Quaternion.Euler(0, rotateYValue, 0);
                 startMoveCounter = true;
                 break;
-            case ActionsToDo.eliminatedAction:
+            case    ActionsToDo.eliminatedAction:
                 eliminateCharacter(); break;
-            case ActionsToDo.arrivedAction:
-                addArrivedDisabled(); break;
-            case ActionsToDo.penalizationAction:
-                addPenalty();
-                    break;
         }
       //  print(startTransformation.position + ", " + destinyTransformation.position);
     }
@@ -164,7 +151,6 @@ public class Character : MonoBehaviour
     // call this 3 functions from cell triggers
     public void addPenalty()
     {
-        Instantiate(penaltyObjectPrefab, transform.position, Quaternion.identity);
         gameMainController.addPenalty();
         // effects here
     }
@@ -184,7 +170,6 @@ public class Character : MonoBehaviour
         gameMainController.removeCharacterFromList(this.gameObject);
         gameMainController.decreaseScoreCharacterEliminated();
         Destroy(this.gameObject);
-
     }
     
 }

@@ -41,7 +41,7 @@ public class GameMainController : MonoBehaviour
 
     //float charactersInDestiny = 0;
     //float charactersEliminated = 0;
-    bool isGameOver = false;
+
 
 
     // podemos hacer una matriz ya que en ningun momento va a haber 2 characters en una misma casilla
@@ -70,7 +70,7 @@ public class GameMainController : MonoBehaviour
 
     void createCharacter()
     {
-        //characterInstantiationParent = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
+        characterInstantiationParent = Instantiate(new GameObject(), new Vector3(0, 0, 0), Quaternion.identity);
         characterInstantiationParent.name = "Characters";
         Vector3 positionSpawner = spawnerGameObject.transform.position;
         GameObject createdCharacter = Instantiate(characterPrefab,
@@ -170,20 +170,20 @@ public class GameMainController : MonoBehaviour
    public void decreaseScoreCharacterEliminated()
     {
         //charactersEliminated++; //no need? hp lo sustituye 
-        HP--;
-        hudmanager.setHP(HP);
-        if (HP == 0) {
+        if (HP > 1) {
+            HP--;
+            hudmanager.setHP(HP);
+        }
+        else {
             gameOver();
         }
+
 
     }
     void gameOver()
     {
-        isGameOver = true;
+
         //call game over in hud manager 
-        Debug.Log("GameOver");
-        //print("GameOver");
-        hudmanager.gameOver();
     }
     public void removeCharacterFromList(GameObject characterGameObject)
     {
@@ -205,10 +205,7 @@ public class GameMainController : MonoBehaviour
         if (doActionTimer > doActionTime)
         {
             doActionTimer = 0;
-            if (!isGameOver) // paramos los movimientos de los jugadores
-            {
-                callToAction();
-            }
+            callToAction();
         }
         doActionTimer += Time.deltaTime;
     }
