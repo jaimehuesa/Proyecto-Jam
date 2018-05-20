@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour {
     public AudioSource audioSourcePenalization;
     public AudioSource audioSourceArrived;
     public AudioSource audioSourceLevelMusic;
-
+    public AudioSource audioSourceGameOver;
     // Use this for initialization
     void Start () {
 		//AudioSource audioSource = GetComponent<AudioSource>();
@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour {
     public void playAudioSourceArrived() { audioSourcePenalization.Play();}
     public void playAudioSourceEliminated() { audioSourceArrived.Play(); }
     public void playAudioSourceLevelMusic() { audioSourceLevelMusic.Play(); }
-
+    public void playAudioSourceGameOver() { audioSourceGameOver.Play(); }
     // Update is called once per frame
     void Update () {
 		

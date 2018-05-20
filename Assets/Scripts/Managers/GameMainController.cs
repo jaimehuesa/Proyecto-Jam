@@ -21,8 +21,9 @@ public class GameMainController : MonoBehaviour
     int HP= initialHP;
     int disabledArrived= initialDisabledArrived;
     float penalization = initialPenalization;
-    float endScore = 0; 
-    
+    float endScore = 0;
+
+    SoundManager soundManager;
     HUDManager hudmanager;
     public float cellSize = 1;
     int numCharactersSaved = 0;
@@ -54,6 +55,8 @@ public class GameMainController : MonoBehaviour
     void Start()
     {
         hudmanager = HUDManagerGameObject.GetComponent<HUDManager>();
+        soundManager= soundManagerGameObject.GetComponent<SoundManager>();
+        soundManager.playAudioSourceGameOver();
         hudmanager.setHP(initialHP);
         hudmanager.setArrived(initialDisabledArrived);
         hudmanager.setPenalization(initialPenalization);
@@ -67,9 +70,6 @@ public class GameMainController : MonoBehaviour
         // createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
        // gameOver();
     }
-    
-   
-
 
     void createCharacter()
     {
@@ -187,6 +187,7 @@ public class GameMainController : MonoBehaviour
     void gameOver()
     {
         isGameOver = true;
+        soundManager.playAudioSourceGameOver();
         //call game over in hud manager 
         // Debug.Log("GameOver");
         calculateEndScore();
