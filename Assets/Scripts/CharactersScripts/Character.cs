@@ -79,7 +79,7 @@ public class Character : MonoBehaviour
         return myDisability;
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (startMoveCounter)
         {

@@ -15,6 +15,8 @@ public class ChangeScene : MonoBehaviour {
 			Debug.Log ("He presionado Enter");
 			Application.LoadLevel ("Main");
 		}
-		
+		if (Input.GetKey (KeyCode.Escape)) {
+			Application.LoadLevel("StartGame");
+		}
 	}
 }
