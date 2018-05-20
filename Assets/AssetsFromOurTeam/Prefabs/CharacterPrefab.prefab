@@ -64,6 +64,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a24587c31bad6e4e960392d20b4a41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionObjectPrefabObjectPrefab: {fileID: 1863759710211750, guid: 4c0dc9587412d9846b273292f46d2f35,
+  destructionObjectPrefab: {fileID: 1863759710211750, guid: 4c0dc9587412d9846b273292f46d2f35,
     type: 2}
+  arrivedObjectPrefab: {fileID: 1237458030009308, guid: f9a05374a7341a74b9038069099d5c06,
+    type: 2}
+  penaltyObjectPrefab: {fileID: 1773346011368146, guid: bb76281027cad2141922e937c5047c8a,
+    type: 2}
+  myDisability: 0
   my3DModel: {fileID: 0}
