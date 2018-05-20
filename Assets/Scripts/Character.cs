@@ -40,6 +40,14 @@ public class Character : MonoBehaviour
         //myDisability = disabilites.blind;
      
     }
+    public void debugChooseAction()
+    {
+        myCurrentAction = randomAction();
+        //myCurrentAction = randomMovement();
+        //print(myCurrentAction);
+        // myCurrentAction = (ActionsToDo)0;
+        //myCurrentAction = ActionsToDo.eliminatedAction;
+    }
     public void setMyAnimator()
     {
         myAnimator = my3DModel.GetComponent<Animator>();
@@ -90,11 +98,7 @@ public class Character : MonoBehaviour
     //int i = 0;
     public void doAction()
     {
-        myCurrentAction = randomAction();
-        //myCurrentAction = randomMovement();
-        //print(myCurrentAction);
-        // myCurrentAction = (ActionsToDo)0;
-       // myCurrentAction = ActionsToDo.eliminatedAction;
+        debugChooseAction();
         startPosition = this.transform.position;
         destinyPosition = this.transform.position;
         startRotation = this.transform.rotation;

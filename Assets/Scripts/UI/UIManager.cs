@@ -21,5 +21,16 @@ public class UIManager : MonoBehaviour {
 	public void DisableUIObject(GameObject go){
 		go.SetActive (false);
 	}
+    
+
+   /* public void EnableUIObject(GameObject go)
+    {
+        go.SetActive(true);
+    }
+
+    public void DisableUIObject(GameObject go)
+    {
+        go.SetActive(false);
+    }*/
 
 }

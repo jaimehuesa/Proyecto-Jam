@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour {
-    public Text timerText, HPText,disabledArrivedText, penalizationText;
-    
-    
+    public Text timerText, HPText, disabledArrivedText, penalizationText
+        , disabledArrivedScoreText, penalizationScoreText, endScoreText;
+    public GameObject scoreGameObject;
 
     // Use this for initialization
     float generalTimerSeconds = 0;
-    void Start () {
+    void Start() {
         //setHP(initialHP);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         generalTimerSeconds += Time.deltaTime;
         updateClockString();
         //print(generalTimerSeconds);
@@ -28,7 +28,7 @@ public class HUDManager : MonoBehaviour {
     }
     public void setHP(int a_HP)
     {
-        HPText.text= a_HP.ToString();
+        HPText.text = a_HP.ToString();
     }
     public void setArrived(int a_arrived)
     {
@@ -42,7 +42,41 @@ public class HUDManager : MonoBehaviour {
 
     public void gameOver()
     {
-        //instantiate canvas game over
+        enableScorePanel();
+    }
+
+    public void setDisabledArrivedScoreText(float a_disabledArrived)
+    {
+        disabledArrivedScoreText.text = a_disabledArrived.ToString();
+    }
+    public void setPenalizationScoreText(float a_penalization)
+    {
+        penalizationScoreText.text = a_penalization.ToString();
+
+    }
+    public void setEndScoreText(float a_endScore)
+    {
+        endScoreText.text = "Score: "+ a_endScore.ToString();
+    }
+
+
+    public void enableScorePanel()
+    {
+        EnableUIObject(scoreGameObject);
+    }
+
+    public void disableScorePanel()
+    {
+        DisableUIObject(scoreGameObject);
+    }
+    void EnableUIObject(GameObject go)
+    {
+        go.SetActive(true);
+    }
+
+    void DisableUIObject(GameObject go)
+    {
+        go.SetActive(false);
     }
 
 

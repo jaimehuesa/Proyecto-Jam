@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement; //include this to use the SceneManager
 public class GameMainController : MonoBehaviour
 {
     public GameObject characterPrefab;
@@ -21,7 +21,8 @@ public class GameMainController : MonoBehaviour
     int HP= initialHP;
     int disabledArrived= initialDisabledArrived;
     float penalization = initialPenalization;
-
+    float endScore = 0; 
+    
     HUDManager hudmanager;
     public float cellSize = 1;
     int numCharactersSaved = 0;
@@ -38,6 +39,9 @@ public class GameMainController : MonoBehaviour
     float offsetHeightSpawner = 0.1f;
     float doActionTime = 2;
     float doActionTimer = 0;
+
+    const float restartTime = 2;
+    float restartTimer = 0;
 
     //float charactersInDestiny = 0;
     //float charactersEliminated = 0;
@@ -59,10 +63,9 @@ public class GameMainController : MonoBehaviour
         characters = new List<GameObject>();
         //createMap();
         //spawnerGameObject = Instantiate(cellPrefab,
-            //new Vector3(2, 0, 0), Quaternion.identity);
+        //new Vector3(2, 0, 0), Quaternion.identity);
         // createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
-
-     
+       // gameOver();
     }
     
    
@@ -177,13 +180,27 @@ public class GameMainController : MonoBehaviour
         }
 
     }
+    void calculateEndScore()
+    {
+        endScore = disabledArrived - penalization;
+    }
     void gameOver()
     {
         isGameOver = true;
         //call game over in hud manager 
-        Debug.Log("GameOver");
+        // Debug.Log("GameOver");
+        calculateEndScore();
         //print("GameOver");
         hudmanager.gameOver();
+        hudmanager.setPenalizationScoreText(penalization);
+        hudmanager.setDisabledArrivedScoreText(disabledArrived);
+        hudmanager.setEndScoreText(endScore);
+    }
+    public void restartLevel()
+    {
+        hudmanager.disableScorePanel();
+        // when we will build the project will not be dark after restarting level
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void removeCharacterFromList(GameObject characterGameObject)
     {
@@ -211,6 +228,14 @@ public class GameMainController : MonoBehaviour
             }
         }
         doActionTimer += Time.deltaTime;
+        if (restartTimer> restartTime)
+        {
+            restartLevel();
+        }
+        if (isGameOver)
+        {
+             restartTimer += Time.deltaTime;
+        }
     }
 }
 
