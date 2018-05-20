@@ -153,15 +153,15 @@ public class GameMainController : MonoBehaviour
             //Dificultad
             if(numDisabledSpawnmed < 2){
                 ticksToCreate = Random.Range(6,8);
-            }else if(numDisabledSpawnmed < 6){
+            }else if(numDisabledSpawnmed < 8){
                 ticksToCreate = Random.Range(5,7);
-            }else if(numDisabledSpawnmed < 10){
-                ticksToCreate = Random.Range(4,6);
             }else if(numDisabledSpawnmed < 12){
-                ticksToCreate = Random.Range(3,5);
+                ticksToCreate = Random.Range(4,6);
             }else if(numDisabledSpawnmed < 14){
+                ticksToCreate = Random.Range(3,5);
+            }else if(numDisabledSpawnmed < 18){
                 ticksToCreate = Random.Range(2,4);
-            }else if(numDisabledSpawnmed < 16){
+            }else if(numDisabledSpawnmed < 20){
                 ticksToCreate = Random.Range(2,3);
             }else{
                 ticksToCreate = 2;
