@@ -14,7 +14,7 @@ public class GameMainController : MonoBehaviour
     // parents no hace falta que sean prefabs ya que genera algo de tipo empty
 
     //score things to change
-    const int initialHP = 3;
+    const int initialHP = 5;
     const int initialDisabledArrived = 0;
     const float initialPenalization = 0;
 
@@ -153,15 +153,15 @@ public class GameMainController : MonoBehaviour
             //Dificultad
             if(numDisabledSpawnmed < 2){
                 ticksToCreate = Random.Range(6,8);
-            }else if(numDisabledSpawnmed < 4){
-                ticksToCreate = Random.Range(5,7);
             }else if(numDisabledSpawnmed < 6){
-                ticksToCreate = Random.Range(4,6);
-            }else if(numDisabledSpawnmed < 8){
-                ticksToCreate = Random.Range(3,5);
+                ticksToCreate = Random.Range(5,7);
             }else if(numDisabledSpawnmed < 10){
-                ticksToCreate = Random.Range(2,4);
+                ticksToCreate = Random.Range(4,6);
             }else if(numDisabledSpawnmed < 12){
+                ticksToCreate = Random.Range(3,5);
+            }else if(numDisabledSpawnmed < 14){
+                ticksToCreate = Random.Range(2,4);
+            }else if(numDisabledSpawnmed < 16){
                 ticksToCreate = Random.Range(2,3);
             }else{
                 ticksToCreate = 2;
