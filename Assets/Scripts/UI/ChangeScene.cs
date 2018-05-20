@@ -13,7 +13,7 @@ public class ChangeScene : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey (KeyCode.Return)) {
 			Debug.Log ("He presionado Enter");
-			Application.LoadLevel ("Main");
+			Application.LoadLevel ("Tutorial");
 		}
 		if (Input.GetKey (KeyCode.Escape)) {
 			Application.LoadLevel("StartGame");
