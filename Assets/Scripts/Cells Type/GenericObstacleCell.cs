@@ -61,7 +61,7 @@ public class GenericObstacleCell : MonoBehaviour {
 		if(collider.tag == "Character"){
 			characterInside = true;
 			Character characterInCell = collider.gameObject.GetComponent<Character>();
-			Debug.Log(characterInCell.getMyDisability());
+			//Debug.Log(characterInCell.getMyDisability());
 			switch(characterInCell.getMyDisability()){
 				case Character.disabilites.wheelchair: 
 					if(!CanBeOvercome(0, characterInCell)){
