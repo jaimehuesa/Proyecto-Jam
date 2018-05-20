@@ -57,6 +57,7 @@ public class GameMainController : MonoBehaviour
     {
         hudmanager = HUDManagerGameObject.GetComponent<HUDManager>();
         soundManager = soundManagerGameObject.GetComponent<SoundManager>();
+        soundManager.playAudioSourceLevelMusic();
         //soundManager.playAudioSourceGameOver();
         hudmanager.setHP(initialHP);
         hudmanager.setArrived(initialDisabledArrived);
@@ -186,16 +187,19 @@ public class GameMainController : MonoBehaviour
     {
         penalization++;
         hudmanager.setPenalization(penalization);
+        soundManager.playAudioSourcePenalization();
     }
 
     public void addArrivedDisabled()
     {
         disabledArrived++;
+        soundManager.playAudioSourceArrived();
         hudmanager.setArrived(disabledArrived);
     }
 
     public void decreaseScoreCharacterEliminated()
     {
+        soundManager.playAudioSourceEliminated();
         //charactersEliminated++; //no need? hp lo sustituye 
         HP--;
         hudmanager.setHP(HP);
@@ -211,6 +215,7 @@ public class GameMainController : MonoBehaviour
     }
     void gameOver()
     {
+        soundManager.playAudioSourceGameOver();
         isGameOver = true;
         //soundManager.playAudioSourceGameOver();
         //call game over in hud manager 
@@ -256,7 +261,7 @@ public class GameMainController : MonoBehaviour
         doActionTimer += Time.deltaTime;
         if (restartTimer > restartTime)
         {
-            restartLevel();
+            //restartLevel();
         }
         if (isGameOver)
         {

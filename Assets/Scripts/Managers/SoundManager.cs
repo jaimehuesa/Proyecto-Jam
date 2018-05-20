@@ -2,61 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
 
 
     public GameObject soundGameObjectPrefab;
     public GameObject listenerGameObject;
 
-
-    /*GameObject audioSourceEliminatedGameObject;
-    GameObject audioSourcePenalizationGameObject;
-    GameObject audioSourceArrivedGameObject;
-    GameObject audioSourceLevelMusicGameObject;
-    GameObject audioSourceGameOverGameObject;*/
-
     public AudioClip audioClipEliminated, audioClipPenalization
         , audioClipArrived, audioClipLevelMusic, audioClipGameOver;
 
-    public AudioSource audioSourceEliminated, audioSourcePenalization
+    AudioSource audioSourceEliminated, audioSourcePenalization
      , audioSourceArrived, audioSourceLevelMusic, audioSourceGameOver;
 
 
     // Use this for initialization
-    void Start() {
-        //AudioSource audioSource = GetComponent<AudioSource>();
-
-        /*AudioSource audioSourceEliminated = audioSourceEliminatedGameObject.GetComponent<AudioSource>();
-        AudioSource audioSourcePenalization = audioSourcePenalizationGameObject.GetComponent<AudioSource>();
-        AudioSource audioSourceArrived = audioSourceArrivedGameObject.GetComponent<AudioSource>();
-        AudioSource audioSourceLevelMusic = audioSourceLevelMusicGameObject.GetComponent<AudioSource>();
-        AudioSource audioSourceGameOver = audioSourceGameOverGameObject.GetComponent<AudioSource>();*/
+    void Start()
+    {
+        audioSourceEliminated = createPrefabSound(audioClipEliminated);
+        audioSourcePenalization = createPrefabSound(audioClipPenalization); 
+        audioSourceArrived = createPrefabSound(audioClipArrived); 
+        audioSourceLevelMusic = createPrefabSound(audioClipLevelMusic); 
+        audioSourceGameOver = createPrefabSound(audioClipGameOver);
+        audioSourceLevelMusic.loop = true;
     }
-    public void playAudioSourcePenalization() { audioSourceEliminated.Play(); }
-    public void playAudioSourceArrived() { audioSourcePenalization.Play(); }
-    public void playAudioSourceEliminated() { audioSourceArrived.Play(); }
-    public void playAudioSourceLevelMusic() { audioSourceLevelMusic.Play(); }
-    public void playAudioSourceGameOver() { audioSourceGameOver.Play(); }
+    public void playAudioSourceEliminated() { playSound(audioSourceEliminated); }
+    public void playAudioSourcePenalization() { playSound(audioSourcePenalization); }
+    public void playAudioSourceArrived() { playSound(audioSourceArrived); }
+    public void playAudioSourceLevelMusic() { playSound(audioSourceLevelMusic); }
+    public void playAudioSourceGameOver() { playSound(audioSourceGameOver); }
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
     }
-
-    void playSound(AudioClip a_audioClip) {
-
+    AudioSource createPrefabSound(AudioClip a_audioClip)
+    {
+        GameObject soundGameObject = Instantiate(soundGameObjectPrefab, listenerGameObject.transform.position, Quaternion.identity);
+        soundGameObject.transform.SetParent(listenerGameObject.transform, false);
+        AudioSource audioS=soundGameObject.GetComponent<AudioSource>();
+        audioS.clip = a_audioClip;
+        return audioS;
     }
 
-   /* AudioSource createPrefabSound(){
-        GameObject goAudioSource Instantiate(soundGameObjectPrefab, listenerGameObject.transform.position());
-        Instantiate(soundGameObjectPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        createdCharacter.transform.SetParent(characterInstantiationParent.transform, false);
-        return goAudioSource.GetComponent<AudioSource>();
-    }*/
+    void playSound(AudioSource a_audioSource)
+    {
+        //instantiate
+        if (!a_audioSource.isPlaying)
+        {
+            a_audioSource.Play();
+        }
+    }
 
-    /*
-     Instancias prefabs con audioSource
-     la nueva 
-      audioSourceEliminatedGameObject=Insta
+    
 
-     */
 }
