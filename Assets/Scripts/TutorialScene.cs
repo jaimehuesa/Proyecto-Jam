@@ -13,7 +13,7 @@ public class TutorialScene : MonoBehaviour {
 	void Update(){
 		if(Input.GetMouseButtonDown(0)){
 			if(!firstScene){
-				SceneManager.LoadScene("Main");
+				SceneManager.LoadScene("Main2");
 			}else{
 				imagePosition.sprite = secondImage;
 				firstScene = false;
