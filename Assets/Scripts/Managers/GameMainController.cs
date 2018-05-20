@@ -33,7 +33,7 @@ public class GameMainController : MonoBehaviour
     int xColumns = 5; /// num columns
     int yRows = 5;  // num rows
     int ticks = 0;
-    int ticksToCreate = 20;
+    int ticksToCreate = 10;
     //float createCharacterTime = 4;
     float createCharacterTimer = 0;
 
@@ -47,6 +47,7 @@ public class GameMainController : MonoBehaviour
     //float charactersInDestiny = 0;
     //float charactersEliminated = 0;
     bool isGameOver = false;
+    private int numDisabledSpawnmed = 0;
 
 
     // podemos hacer una matriz ya que en ningun momento va a haber 2 characters en una misma casilla
@@ -147,9 +148,31 @@ public class GameMainController : MonoBehaviour
         if (ticks % ticksToCreate == 0)
         {
             createCharacter();
-        }
 
+            //Dificultad
+            if(numDisabledSpawnmed < 2){
+                ticksToCreate = Random.Range(6,8);
+            }else if(numDisabledSpawnmed < 4){
+                ticksToCreate = Random.Range(5,7);
+            }else if(numDisabledSpawnmed < 6){
+                ticksToCreate = Random.Range(4,6);
+            }else if(numDisabledSpawnmed < 8){
+                ticksToCreate = Random.Range(3,5);
+            }else if(numDisabledSpawnmed < 10){
+                ticksToCreate = Random.Range(2,4);
+            }else if(numDisabledSpawnmed < 12){
+                ticksToCreate = Random.Range(2,3);
+            }else{
+                ticksToCreate = 2;
+            }
+
+            numDisabledSpawnmed++;
+            
+
+            ticks = 0;
+        }
     }
+
     /*public void characterSaved()
     {
         numCharactersSaved++;

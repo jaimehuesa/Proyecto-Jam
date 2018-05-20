@@ -124,7 +124,7 @@ public class GenericObstacleCell : MonoBehaviour {
 	void OnTriggerExit(Collider collider){
 		if(collider.tag == "Character"){
 			characterInside = false;
-			Debug.Log("EXIT");
+			//Debug.Log("EXIT");
 			if(!isObstacle){
 				StartCoroutine (DelayObstacleGenerator());
 			}
