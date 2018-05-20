@@ -200,7 +200,6 @@ public class Character : MonoBehaviour
         Instantiate(arrivedObjectPrefab, transform.position, Quaternion.identity);
         gameMainController.addArrivedDisabled();
         gameMainController.removeCharacterFromList(this.gameObject);
-        gameMainController.addArrivedDisabled();
         Destroy(this.gameObject);
         //effects here
     }

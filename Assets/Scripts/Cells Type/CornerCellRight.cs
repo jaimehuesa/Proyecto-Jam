@@ -15,7 +15,7 @@ public class CornerCellRight : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider c){
 		if (c.CompareTag ("Character")) {
-			c.GetComponent<Character> ().callRotateFromCell (-90f);
+			c.GetComponent<Character> ().callRotateFromCell (90f);
 		}
 	}
 }

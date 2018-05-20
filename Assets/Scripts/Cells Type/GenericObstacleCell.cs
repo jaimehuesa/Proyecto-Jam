@@ -126,7 +126,7 @@ public class GenericObstacleCell : MonoBehaviour {
 			characterInside = false;
 			Debug.Log("EXIT");
 			if(!isObstacle){
-				TurnIntoObstacle();
+				StartCoroutine (DelayObstacleGenerator());
 			}
 		}
 	}
@@ -206,5 +206,9 @@ public class GenericObstacleCell : MonoBehaviour {
 			case 5: isAlzheimerObstacle = false; break;
 			default: Debug.LogError("Child out of range"); break;
 		}
+	}
+	private IEnumerator DelayObstacleGenerator(){
+		yield return new WaitForSeconds (0.5f);
+		TurnIntoObstacle();
 	}
 }
