@@ -33,7 +33,7 @@ public class GameMainController : MonoBehaviour
     int xColumns = 5; /// num columns
     int yRows = 5;  // num rows
     int ticks = 0;
-    int ticksToCreate = 2;
+    int ticksToCreate = 20;
     //float createCharacterTime = 4;
     float createCharacterTimer = 0;
 
@@ -69,6 +69,7 @@ public class GameMainController : MonoBehaviour
         //new Vector3(2, 0, 0), Quaternion.identity);
         // createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
         // gameOver();
+        createCharacter();//initial character
     }
 
     void createCharacter()

@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
 
     GameMainController gameMainController;
     ActionsToDo myCurrentAction = ActionsToDo.moveAction; // por defecto va a moverse
+    ActionsToDo myNextAction = ActionsToDo.moveAction; // asincrona
     public disabilites myDisability;
     Vector3 startPosition;
     Vector3 destinyPosition;
@@ -40,20 +41,27 @@ public class Character : MonoBehaviour
         //myDisability = disabilites.blind;
      
     }
+    public void setNextCharacterAction(ActionsToDo a_myNextAction)
+    {
+        myNextAction= a_myNextAction;
+    }
     public void debugChooseAction()
     {
-        //myCurrentAction = randomAction();
+        //   myCurrentAction = randomAction();
         //myCurrentAction = randomMovement();
         //print(myCurrentAction);
         // myCurrentAction = (ActionsToDo)0;
         //myCurrentAction = ActionsToDo.moveAction;
+        //callRotateFromCell(-90f);
+        //myCurrentAction = ActionsToDo.rotationAction;
     }
     // call this
     public void callRotateFromCell(float a_rotateYValue)
     {
-        myCurrentAction = ActionsToDo.rotationAction;
+        myNextAction = ActionsToDo.rotationAction;
         rotateYValue = a_rotateYValue;
     }
+   
     public void setMyAnimator()
     {
         myAnimator = my3DModel.GetComponent<Animator>();
@@ -104,6 +112,8 @@ public class Character : MonoBehaviour
     //int i = 0;
     public void doAction()
     {
+        myCurrentAction=myNextAction;
+        moveCharacterTimer = 0;
         debugChooseAction();
         startPosition = this.transform.position;
         destinyPosition = this.transform.position;
@@ -111,7 +121,7 @@ public class Character : MonoBehaviour
         destinyRotation =transform.rotation;
         Vector3 pos = this.transform.position;
         Quaternion rotation = this.transform.rotation;
-
+        //print(myCurrentAction);
         switch (myCurrentAction)
         {
             case ActionsToDo.moveAction:
@@ -131,9 +141,10 @@ public class Character : MonoBehaviour
                 addPenalty();
                     break;
         }
-        myCurrentAction = ActionsToDo.moveAction; // default action
+        myNextAction = ActionsToDo.moveAction;
         //  print(startTransformation.position + ", " + destinyTransformation.position);
     }
+    
     void move()
     {
         
@@ -170,6 +181,7 @@ public class Character : MonoBehaviour
             //transform.Rotate(Vector3.up* 90, Space.World);
             moveCharacterTimer = 0;
             startMoveCounter = false;
+            //myCurrentAction = ActionsToDo.moveAction; // default action
         }
     }
     // call this 3 functions from cell triggers
