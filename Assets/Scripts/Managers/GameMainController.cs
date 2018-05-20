@@ -9,7 +9,7 @@ public class GameMainController : MonoBehaviour
     public GameObject spawnerGameObject;
     public GameObject[] modelPrefabs3D;
     public GameObject HUDManagerGameObject;
-
+    public GameObject soundManagerGameObject;
 
     // parents no hace falta que sean prefabs ya que genera algo de tipo empty
 
