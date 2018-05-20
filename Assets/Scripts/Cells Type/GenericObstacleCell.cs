@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class GenericObstacleCell : MonoBehaviour {
 
-	public bool isWheelchairObstacle, isBlindObstacle, isAlzheimerObstacle;
+	[SerializeField]
+	private bool isWheelchairObstacle, isBlindObstacle, isAlzheimerObstacle;
 	private bool oldWheelchairObs, oldBlindObs, oldAlzheimerObs;
 	//public GameObject wc_ObsModel, blind_ObsModel, alz_ObsModel, empty_ObsModel;
 	//public GameObject wc_SolModel, blind_SolModel, alz_SolModel;
 	//public GameObject modelPlace;
 	private int childActive;
+	private int lastObstacleActive;
 
 	///<summary>
 	/// Primero obstaculos despues soluciones. Silla de ruedas, ciego, alzheimer
 	///</summary>
 	private GameObject[] child = new GameObject[6];
 	
+	[SerializeField]
 	private bool isObstacle;
+	[SerializeField]
+	private bool characterInside = false;
 
 	void Start(){
 		isObstacle = true;
@@ -28,9 +33,12 @@ public class GenericObstacleCell : MonoBehaviour {
 		child[4] = this.transform.GetChild(4).gameObject;
 		child[5] = this.transform.GetChild(5).gameObject;
 
-		EnablePrefab(childActive);		
+		//childActive = Random.Range(0, 3);
+		//EnablePrefab(childActive);
+		TurnIntoObstacle();		
 	}
 
+	/*
 	void Update(){
 		if(isWheelchairObstacle != oldWheelchairObs || isBlindObstacle != oldBlindObs || isAlzheimerObstacle != oldAlzheimerObs){
 			PlaceObstacle();
@@ -39,74 +47,108 @@ public class GenericObstacleCell : MonoBehaviour {
 		oldBlindObs = isBlindObstacle;
 		oldAlzheimerObs = isAlzheimerObstacle;
 	}
+	*/
 
 	public void TurnIntoObstacle(){
 		isObstacle = true;
 
-		EnablePrefab(Random.Range(0, 3));
+		int randomNum = Random.Range(0, 3);
+		lastObstacleActive = randomNum;
+		EnablePrefab(randomNum);
 	}
 
 	void OnTriggerEnter(Collider collider){
 		if(collider.tag == "Character"){
+			characterInside = true;
 			Character characterInCell = collider.gameObject.GetComponent<Character>();
 			Debug.Log(characterInCell.getMyDisability());
 			switch(characterInCell.getMyDisability()){
 				case Character.disabilites.wheelchair: 
-					if(!CanBeOvercome(1)){
-						characterInCell.eliminateCharacter();
+					if(!CanBeOvercome(0, characterInCell)){
+						if(isObstacle){
+							characterInCell.eliminateCharacter();
+							characterInside = false;
+						}else{
+							characterInCell.addPenalty();
+						}
+					}else{
+						if(!isObstacle && lastObstacleActive != 0){
+							characterInCell.addPenalty();
+						}
 					}
 					break;
 				case Character.disabilites.blind: 
-					if(!CanBeOvercome(2)){
-						characterInCell.eliminateCharacter();
+					if(!CanBeOvercome(1, characterInCell)){
+						if(isObstacle){
+							characterInCell.eliminateCharacter();
+							characterInside = false;
+						}else{
+							characterInCell.addPenalty();
+						}
+					}else{
+						if(!isObstacle  && lastObstacleActive != 1){
+							characterInCell.addPenalty();
+						}
 					}
 					break;
 				case Character.disabilites.alzheimer:
-					if(!CanBeOvercome(3)){
-						characterInCell.eliminateCharacter();
+					if(!CanBeOvercome(2, characterInCell)){
+						if(isObstacle){
+							characterInCell.eliminateCharacter();
+							characterInside = false;
+						}else{
+							characterInCell.addPenalty();
+						}
+					}else{
+						if(!isObstacle  && lastObstacleActive != 2){
+							characterInCell.addPenalty();
+						}
 					}
 					break;
 				default: 
 					Debug.LogError("The collider character has a disability not included int this script");
 					break;
 			}
-			isObstacle = true;
 		}
 	}
 
-	private bool CanBeOvercome(int dysabledType){
+	void OnTriggerExit(Collider collider){
+		if(collider.tag == "Character"){
+			characterInside = false;
+			Debug.Log("EXIT");
+			if(!isObstacle){
+				TurnIntoObstacle();
+			}
+		}
+	}
+
+	private bool CanBeOvercome(int dysabledType, Character character){
 		switch(dysabledType){
-			case 1: 
+			case 0: 
 				if(isWheelchairObstacle){
-					if(!isObstacle){
-						//gameManager.Penalty();
-						Debug.LogError("Falta un metodo para añadir multas al gameManager");
-					}
-					TurnIntoObstacle();
 					return false;
 				}else{
+					if(!isObstacle && (isWheelchairObstacle || isBlindObstacle || isAlzheimerObstacle)){
+						//character.addPenalty();
+					}
+					return true;
+				}
+			case 1: 
+				if (isBlindObstacle){
+					return false;
+				}else{
+					if(!isObstacle && (isWheelchairObstacle || isBlindObstacle || isAlzheimerObstacle)){
+						//character.addPenalty();
+					}
 					return true;
 				}
 			case 2: 
-				if (isBlindObstacle){
-					if(!isObstacle){
-						//gameManager.Penalty();
-						Debug.LogError("Falta un metodo para añadir multas al gameManager");
-					}
-					TurnIntoObstacle();
-					return false;
-				}else{
-					return true;
-				}
-			case 3: 
 				if (isAlzheimerObstacle){
-					if(!isObstacle){
-						//gameManager.Penalty();
-						Debug.LogError("Falta un metodo para añadir multas al gameManager");
-					}
-					TurnIntoObstacle();
 					return false;
 				}else{
+					if(!isObstacle && (isWheelchairObstacle || isBlindObstacle || isAlzheimerObstacle)){
+						//character.addPenalty();
+					}
 					return true;				
 				}
 			default: Debug.LogError("The dysabledType parameter passed is not valid"); return true;
@@ -126,16 +168,18 @@ public class GenericObstacleCell : MonoBehaviour {
 	}
 
 	public void PlaceSolution(int solution){
-		if(isObstacle){
-			isObstacle = false;
+		if(!characterInside){
+			if(isObstacle){
+				isObstacle = false;
 
-			switch(solution){
-				case 1: EnablePrefab(3); break;
-				case 2: EnablePrefab(4); break;
-				case 3: EnablePrefab(5); break;
-				default: Debug.LogError("Wrong discapacity solution value"); break;
-			}
-		}		
+				switch(solution){
+					case 1: EnablePrefab(3); break;
+					case 2: EnablePrefab(4); break;
+					case 3: EnablePrefab(5); break;
+					default: Debug.LogError("Wrong discapacity solution value"); break;
+				}
+			}	
+		}	
 	}
 
 	private void EnablePrefab(int childNum){

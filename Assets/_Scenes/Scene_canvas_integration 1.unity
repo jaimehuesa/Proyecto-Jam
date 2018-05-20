@@ -1586,7 +1586,7 @@ MonoBehaviour:
   - {fileID: 1771556965897840, guid: 9a53954d119952940994c7839c027ef9, type: 2}
   - {fileID: 1664432763005522, guid: df3929243ce26e546a074c04cb8e35f2, type: 2}
   HUDManagerGameObject: {fileID: 151129178}
-  soundManagerGameObject: {fileID: 0}
+  soundManagerGameObject: {fileID: 1450695627}
   cellSize: 1
 --- !u!4 &590856450
 Transform:
@@ -4094,6 +4094,7 @@ MonoBehaviour:
   audioSourcePenalization: {fileID: 0}
   audioSourceArrived: {fileID: 0}
   audioSourceLevelMusic: {fileID: 0}
+  audioSourceGameOver: {fileID: 0}
 --- !u!1001 &1459630800
 Prefab:
   m_ObjectHideFlags: 0

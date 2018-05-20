@@ -56,7 +56,7 @@ public class GameMainController : MonoBehaviour
     {
         hudmanager = HUDManagerGameObject.GetComponent<HUDManager>();
         soundManager= soundManagerGameObject.GetComponent<SoundManager>();
-        soundManager.playAudioSourceGameOver();
+        //soundManager.playAudioSourceGameOver();
         hudmanager.setHP(initialHP);
         hudmanager.setArrived(initialDisabledArrived);
         hudmanager.setPenalization(initialPenalization);
@@ -187,7 +187,7 @@ public class GameMainController : MonoBehaviour
     void gameOver()
     {
         isGameOver = true;
-        soundManager.playAudioSourceGameOver();
+        //soundManager.playAudioSourceGameOver();
         //call game over in hud manager 
         // Debug.Log("GameOver");
         calculateEndScore();
