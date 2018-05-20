@@ -159,9 +159,9 @@ public class GameMainController : MonoBehaviour
                 ticksToCreate = Random.Range(4,6);
             }else if(numDisabledSpawnmed < 14){
                 ticksToCreate = Random.Range(3,5);
-            }else if(numDisabledSpawnmed < 18){
-                ticksToCreate = Random.Range(2,4);
             }else if(numDisabledSpawnmed < 20){
+                ticksToCreate = Random.Range(2,4);
+            }else if(numDisabledSpawnmed < 25){
                 ticksToCreate = Random.Range(2,3);
             }else{
                 ticksToCreate = 2;
