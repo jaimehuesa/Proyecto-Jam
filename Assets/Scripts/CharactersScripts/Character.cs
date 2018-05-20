@@ -46,7 +46,13 @@ public class Character : MonoBehaviour
         //myCurrentAction = randomMovement();
         //print(myCurrentAction);
         // myCurrentAction = (ActionsToDo)0;
-        myCurrentAction = ActionsToDo.moveAction;
+        //myCurrentAction = ActionsToDo.moveAction;
+    }
+    // call this
+    public void callRotateFromCell(float a_rotateYValue)
+    {
+        myCurrentAction = ActionsToDo.rotationAction;
+        rotateYValue = a_rotateYValue;
     }
     public void setMyAnimator()
     {
@@ -125,7 +131,8 @@ public class Character : MonoBehaviour
                 addPenalty();
                     break;
         }
-      //  print(startTransformation.position + ", " + destinyTransformation.position);
+        myCurrentAction = ActionsToDo.moveAction; // default action
+        //  print(startTransformation.position + ", " + destinyTransformation.position);
     }
     void move()
     {
