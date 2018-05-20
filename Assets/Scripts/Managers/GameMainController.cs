@@ -18,8 +18,8 @@ public class GameMainController : MonoBehaviour
     const int initialDisabledArrived = 0;
     const float initialPenalization = 0;
 
-    int HP= initialHP;
-    int disabledArrived= initialDisabledArrived;
+    int HP = initialHP;
+    int disabledArrived = initialDisabledArrived;
     float penalization = initialPenalization;
     float endScore = 0;
 
@@ -55,7 +55,7 @@ public class GameMainController : MonoBehaviour
     void Start()
     {
         hudmanager = HUDManagerGameObject.GetComponent<HUDManager>();
-        soundManager= soundManagerGameObject.GetComponent<SoundManager>();
+        soundManager = soundManagerGameObject.GetComponent<SoundManager>();
         //soundManager.playAudioSourceGameOver();
         hudmanager.setHP(initialHP);
         hudmanager.setArrived(initialDisabledArrived);
@@ -68,7 +68,7 @@ public class GameMainController : MonoBehaviour
         //spawnerGameObject = Instantiate(cellPrefab,
         //new Vector3(2, 0, 0), Quaternion.identity);
         // createCharacterTimer = createCharacterTime; // para que no tarde el tiempo maximo en instanciarlo
-       // gameOver();
+        // gameOver();
     }
 
     void createCharacter()
@@ -101,7 +101,7 @@ public class GameMainController : MonoBehaviour
         //characterScript.myDisability = Character.disabilites.alzheimer; 
         created3dModel.transform.SetParent(characterGameObject.transform, false);
         //created3dModel.transform.Rotate(Vector3.up * -90, Space.World);
-        characterGameObject.GetComponent<Character>().myDisability = (Character.disabilites) rand;
+        characterGameObject.GetComponent<Character>().myDisability = (Character.disabilites)rand;
         //Debug.Log("-> " + (Character.disabilites) rand + " - " +characterGameObject.GetComponent<Character>().myDisability);
         return created3dModel;
         //print(length);
@@ -157,7 +157,7 @@ public class GameMainController : MonoBehaviour
     {
         characters++;
     }*/
-    
+
     public void addPenalty()
     {
         penalization++;
@@ -169,13 +169,14 @@ public class GameMainController : MonoBehaviour
         disabledArrived++;
         hudmanager.setArrived(disabledArrived);
     }
-    
-   public void decreaseScoreCharacterEliminated()
+
+    public void decreaseScoreCharacterEliminated()
     {
         //charactersEliminated++; //no need? hp lo sustituye 
         HP--;
         hudmanager.setHP(HP);
-        if (HP == 0) {
+        if (HP == 0)
+        {
             gameOver();
         }
 
@@ -229,13 +230,13 @@ public class GameMainController : MonoBehaviour
             }
         }
         doActionTimer += Time.deltaTime;
-        if (restartTimer> restartTime)
+        if (restartTimer > restartTime)
         {
             restartLevel();
         }
         if (isGameOver)
         {
-             restartTimer += Time.deltaTime;
+            restartTimer += Time.deltaTime;
         }
     }
 }
