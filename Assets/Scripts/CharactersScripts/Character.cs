@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public enum disabilites {  alzheimer, blind, wheelchair };
+    public enum disabilites {  wheelchair, alzheimer, blind };
     public GameObject destructionObjectPrefab;
     public GameObject arrivedObjectPrefab;
     public GameObject penaltyObjectPrefab;
@@ -42,11 +42,11 @@ public class Character : MonoBehaviour
     }
     public void debugChooseAction()
     {
-        myCurrentAction = randomAction();
+        //myCurrentAction = randomAction();
         //myCurrentAction = randomMovement();
         //print(myCurrentAction);
         // myCurrentAction = (ActionsToDo)0;
-        //myCurrentAction = ActionsToDo.eliminatedAction;
+        myCurrentAction = ActionsToDo.moveAction;
     }
     public void setMyAnimator()
     {

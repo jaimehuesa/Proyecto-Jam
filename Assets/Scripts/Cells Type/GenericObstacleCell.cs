@@ -42,9 +42,6 @@ public class GenericObstacleCell : MonoBehaviour {
 
 	public void TurnIntoObstacle(){
 		isObstacle = true;
-		for(int i = 0 ; i < 100 ; i++){
-			Debug.Log(Random.Range(0, 3));
-		}
 
 		EnablePrefab(Random.Range(0, 3));
 	}
