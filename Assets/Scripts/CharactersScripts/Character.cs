@@ -88,6 +88,7 @@ public class Character : MonoBehaviour
                 case ActionsToDo.moveAction:
                     move(); break;
                 case ActionsToDo.rotationAction: rotate();  break;
+                case ActionsToDo.penalizationAction: move(); break;
             }
             moveCharacterTimer += Time.deltaTime;
         }
@@ -139,6 +140,8 @@ public class Character : MonoBehaviour
                 addArrivedDisabled(); break;
             case ActionsToDo.penalizationAction:
                 addPenalty();
+                destinyPosition = startPosition + transform.forward * moveDistance;
+                startMoveCounter = true;
                     break;
         }
         myNextAction = ActionsToDo.moveAction;

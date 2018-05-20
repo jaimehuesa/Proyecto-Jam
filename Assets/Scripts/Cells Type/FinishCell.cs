@@ -6,7 +6,8 @@ public class FinishCell : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider){
 		if(collider.tag == "Character"){
-			collider.gameObject.GetComponent<Character>().addArrivedDisabled();
+			//collider.gameObject.GetComponent<Character>().addArrivedDisabled();
+			collider.gameObject.GetComponent<Character>().setNextCharacterAction(Character.ActionsToDo.arrivedAction);
 		}
 	}
 }

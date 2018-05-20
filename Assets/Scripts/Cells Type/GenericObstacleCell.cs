@@ -66,42 +66,51 @@ public class GenericObstacleCell : MonoBehaviour {
 				case Character.disabilites.wheelchair: 
 					if(!CanBeOvercome(0, characterInCell)){
 						if(isObstacle){
-							characterInCell.eliminateCharacter();
+							//characterInCell.eliminateCharacter();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.eliminatedAction);
 							characterInside = false;
 						}else{
-							characterInCell.addPenalty();
+							//characterInCell.addPenalty();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.penalizationAction);
 						}
 					}else{
 						if(!isObstacle && lastObstacleActive != 0){
-							characterInCell.addPenalty();
+							//characterInCell.addPenalty();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.penalizationAction);
 						}
 					}
 					break;
 				case Character.disabilites.blind: 
 					if(!CanBeOvercome(1, characterInCell)){
 						if(isObstacle){
-							characterInCell.eliminateCharacter();
+							//characterInCell.eliminateCharacter();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.eliminatedAction);
 							characterInside = false;
 						}else{
-							characterInCell.addPenalty();
+							//characterInCell.addPenalty();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.penalizationAction);
 						}
 					}else{
 						if(!isObstacle  && lastObstacleActive != 1){
-							characterInCell.addPenalty();
+							//characterInCell.addPenalty();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.penalizationAction);
 						}
 					}
 					break;
 				case Character.disabilites.alzheimer:
 					if(!CanBeOvercome(2, characterInCell)){
 						if(isObstacle){
-							characterInCell.eliminateCharacter();
+							//characterInCell.eliminateCharacter();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.eliminatedAction);
 							characterInside = false;
 						}else{
-							characterInCell.addPenalty();
+							//characterInCell.addPenalty();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.penalizationAction);
 						}
 					}else{
 						if(!isObstacle  && lastObstacleActive != 2){
-							characterInCell.addPenalty();
+							//characterInCell.addPenalty();
+							characterInCell.setNextCharacterAction(Character.ActionsToDo.penalizationAction);
 						}
 					}
 					break;
