@@ -11,12 +11,9 @@ public class ChangeScene : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.Return)) {
+		if (Input.GetMouseButtonDown(0)) {
 			Debug.Log ("He presionado Enter");
 			Application.LoadLevel ("Tutorial");
-		}
-		if (Input.GetKey (KeyCode.Escape)) {
-			Application.LoadLevel("StartGame");
 		}
 	}
 }
